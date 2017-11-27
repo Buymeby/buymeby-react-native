@@ -4,6 +4,7 @@ import MapView from 'react-native-maps'
 import VendorLocatorCallout from './VendorLocatorCallout'
 import Styles from './Styles/VendorLocatorStyles'
 import { calculateRegion } from '../Lib/MapHelpers'
+import { connect } from 'react-redux'
 
 /* ***********************************************************
 * IMPORTANT!!! Before you get started, if you are going to support Android,
@@ -20,33 +21,10 @@ class VendorLocator extends React.Component {
   * For full documentation, see https://github.com/lelandrichardson/react-native-maps
   *************************************************************/
 
-  constructor (props) {
-    super(props)
-    /* ***********************************************************
-    * STEP 1
-    * Set the array of locations to be displayed on your map. You'll need to define at least
-    * a latitude and longitude as well as any additional information you wish to display.
-    *************************************************************/
-    const locations = [
-      { title: 'Location A', latitude: 37.78825, longitude: -122.4324 },
-      { title: 'Location B', latitude: 37.75825, longitude: -122.4624 }
-    ]
-    /* ***********************************************************
-    * STEP 2
-    * Set your initial region either by dynamically calculating from a list of locations (as below)
-    * or as a fixed point, eg: { latitude: 123, longitude: 123, latitudeDelta: 0.1, longitudeDelta: 0.1}
-    * You can generate a handy `calculateRegion` function with
-    * `ignite generate map-utilities`
-    *************************************************************/
-    const region = calculateRegion(locations, { latPadding: 0.05, longPadding: 0.05 })
-    this.state = {
-      region,
-      locations,
-      showUserLocation: true
-    }
-    this.renderMapMarkers = this.renderMapMarkers.bind(this)
-    this.onRegionChange = this.onRegionChange.bind(this)
-  }
+  // constructor (props) {
+    // this.renderMapMarkers = this.renderMapMarkers.bind(this)
+    // this.onRegionChange = this.onRegionChange.bind(this)
+  // }
 
   componentWillReceiveProps (newProps) {
     /* ***********************************************************
@@ -102,14 +80,25 @@ class VendorLocator extends React.Component {
     return (
       <MapView
         style={Styles.container}
-        initialRegion={this.state.region}
+        region={this.props.region}
         onRegionChangeComplete={this.onRegionChange}
-        showsUserLocation={this.state.showUserLocation}
+        showsUserLocation={true}
       >
-        {this.state.locations.map((location) => this.renderMapMarkers(location))}
+        {this.props.locations.map((location) => this.renderMapMarkers(location))}
       </MapView>
     )
   }
 }
 
-export default VendorLocator
+const mapStateToProps = (state) => {
+  return {
+    vendors: state.startup.vendors,
+    locations: state.startup.locations,
+    region: state.startup.region
+    // longitude: state.startup.longitude
+    // latitudeDelta: state.startup.latitudeDelta
+    // longitudeDelta: state.startup.longitudeDelta
+  }
+}
+
+export default connect(mapStateToProps)(VendorLocator)

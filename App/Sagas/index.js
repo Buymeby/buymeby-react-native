@@ -22,10 +22,6 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 /* ------------- Connect Types To Sagas ------------- */
 
 export default function * root () {
-  console.tron.log({
-    message: 'take a look into the api',
-    vendors_response: api
-  })
   yield all([
     takeLatest(StartupTypes.STARTUP, startup, api),
     takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api)

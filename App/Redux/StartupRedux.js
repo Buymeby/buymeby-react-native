@@ -1,4 +1,5 @@
 import { createReducer, createActions } from 'reduxsauce'
+import { calculateRegion } from '../Lib/MapHelpers'
 import Immutable from 'seamless-immutable'
 
 /* ------------- Types and Action Creators ------------- */
@@ -16,21 +17,30 @@ export const INITIAL_STATE = Immutable({
   longitude: null,
   latitude: null,
   vendors: [],
-  fetching: null,
-  error: null
+  startup_complete: false,
+  error: null,
+  locations: [],
+  region: {}
 })
 
 export const startup = (state) => {
-  return state.merge({ fetching: true })
+  return state.merge({ startup_complete: false })
 }
 
 export const success = (state, action) => {
   const { vendors } = action
-  return state.merge({ fetching: false, error: null, vendors })
+  const locations = vendors.map(v => ({
+    title: v.name,
+    latitude: Number(v.latitude),
+    longitude: Number(v.longitude)
+  }))
+  const region = calculateRegion(locations, { latPadding: 0.1, longPadding: 0.1 })
+
+  return state.merge({ startup_complete: true, error: null, vendors, locations, region })
 }
 
 export const failure = (state) => {
-  return state.merge({ fetching: false, error: true, vendors: null })
+  return state.merge({ startup_complete: true, error: true, vendors: null })
 }
 
 export const reducer = createReducer(INITIAL_STATE, {
