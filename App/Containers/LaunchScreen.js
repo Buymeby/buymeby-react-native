@@ -5,7 +5,6 @@ import VendorLocator from '../Components/VendorLocator.js'
 import VendorList from '../Components/VendorList.js'
 
 // For API
-import API from '../Services/Api'
 import FJSON from 'format-json'
 
 import { Images } from '../Themes'

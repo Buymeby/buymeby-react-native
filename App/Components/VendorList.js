@@ -1,9 +1,11 @@
 import React from 'react'
 import { List, ListItem } from 'react-native-elements'
+import { TouchableHighlight } from 'react-native'
 import Styles from './Styles/VendorListStyles'
 import { connect } from 'react-redux'
 
 class VendorList extends React.Component {
+
   render () {
     const vendors = this.props.vendors;
     if (!vendors) {
@@ -13,11 +15,12 @@ class VendorList extends React.Component {
     return (
       <List style={Styles.list}>
         {
-          this.props.vendors.map((vendor, i) => (
+          vendors.map((vendor, i) => (
             <ListItem
               key={i}
               title={vendor.name}
               subtitle={vendor.description}
+              onPress={this.props.openVendorDetails.bind(this, vendor)}
             />
           ))
         }
@@ -28,8 +31,13 @@ class VendorList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    vendors: state.startup.vendors
+    vendors: state.startup.vendors,
+    navigation: state.nav
   }
 }
 
-export default connect(mapStateToProps)(VendorList)
+const mapDispatchToProps = (dispatch) => ({
+  openVendorDetails: (vendor) => dispatch({ type: 'SelectVendor', vendor: vendor })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(VendorList)
