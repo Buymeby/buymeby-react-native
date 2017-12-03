@@ -8,7 +8,7 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     width: '100%',
-    height: 480
+    height: 360
   },
   map: {
     // For Android :/

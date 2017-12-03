@@ -1,13 +1,31 @@
 import AppNavigation from '../Navigation/AppNavigation'
 import { NavigationActions } from 'react-navigation'
 
+const assignHeaderState = (state) => {
+  let newScreen = state.routes[state.index].routeName
+  let vendor = state.vendor
+  switch(newScreen) {
+    case 'LaunchScreen':
+      return Object.assign(state, { headerText: 'Buymeby', icon: 'menu' })
+    case 'VendorDetailsScreen':
+      return Object.assign(state, { headerText: vendor.name, icon: 'chevron-left' })
+    default:
+      return Object.assign(state, { headerText: 'Buymeby', icon: 'menu' })
+  }
+}
+
 export const reducer = (state, action) => {
-  console.tron.log(action)
   let newState
   switch (action.type) {
-    case 'SelectVendor':
+    case 'VendorSelected':
       newState = AppNavigation.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'VendorDetailsScreen'}),
+        Object.assign(state, { vendor: action.vendor })
+      )
+      break
+    case 'NavigateBack':
+      newState = AppNavigation.router.getStateForAction(
+        NavigationActions.back(),
         state
       )
       break
@@ -15,6 +33,8 @@ export const reducer = (state, action) => {
       newState = AppNavigation.router.getStateForAction(action, state)
       break
   }
-
-  return newState || state
+  if (newState) {
+    return assignHeaderState(newState)
+  }
+  return state
 }

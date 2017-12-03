@@ -24,6 +24,7 @@
     "git-hook": "npm run lint -s && npm run test -s"
   },
   "dependencies": {
+    "@shoutem/theme": "^0.10.0",
     "@shoutem/ui": "^0.21.3",
     "apisauce": "^0.14.0",
     "create-react-class": "^15.6.2",

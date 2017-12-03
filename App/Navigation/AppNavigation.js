@@ -6,7 +6,10 @@ import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
-  LaunchScreen: { screen: LaunchScreen },
+  LaunchScreen: {
+    screen: LaunchScreen,
+    navigationOptions: { title: 'Home'}
+  },
   VendorDetailsScreen: { screen: VendorDetailsScreen }
 }, {
   // Default config for all screens
