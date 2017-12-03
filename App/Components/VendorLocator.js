@@ -52,26 +52,10 @@ class VendorLocator extends React.Component {
     // Fetch new data...
   }
 
-  calloutPress (location) {
-    /* ***********************************************************
-    * STEP 5
-    * Configure what will happen (if anything) when the user
-    * presses your callout.
-    *************************************************************/
-
-    // console.tron.log(location) // Reactotron
-  }
-
-  renderMapMarkers (location) {
-    /* ***********************************************************
-    * STEP 6
-    * Customize the appearance and location of the map marker.
-    * Customize the callout in ./VendorLocatorCallout.js
-    *************************************************************/
-
+  renderMapMarkers (vendor) {
     return (
-      <MapView.Marker key={location.title} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
-        <VendorLocatorCallout location={location} onPress={this.calloutPress} />
+      <MapView.Marker key={vendor.name} coordinate={{latitude: vendor.latitude, longitude: vendor.longitude}}>
+        <VendorLocatorCallout location={{title: vendor.name, latitude: vendor.latitude, longitude: vendor.longitude}} onPress={this.props.openVendorDetails.bind(this, vendor)} />
       </MapView.Marker>
     )
   }
@@ -84,21 +68,23 @@ class VendorLocator extends React.Component {
         onRegionChangeComplete={this.onRegionChange}
         showsUserLocation={true}
       >
-        {this.props.locations.map((location) => this.renderMapMarkers(location))}
+        {this.props.vendors.map((vendor) => this.renderMapMarkers(vendor))}
       </MapView>
     )
   }
 }
 
 const mapStateToProps = (state) => {
+  console.tron.log(state)
   return {
     vendors: state.startup.vendors,
     locations: state.startup.locations,
     region: state.startup.region
-    // longitude: state.startup.longitude
-    // latitudeDelta: state.startup.latitudeDelta
-    // longitudeDelta: state.startup.longitudeDelta
   }
 }
 
-export default connect(mapStateToProps)(VendorLocator)
+const mapDispatchToProps = (dispatch) => ({
+  openVendorDetails: (vendor) => dispatch({ type: 'VendorSelected', vendor: vendor })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(VendorLocator)
