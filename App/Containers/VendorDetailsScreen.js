@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View } from 'react-native'
-import VendorList from '../Components/VendorList.js'
+import ItemList from '../Components/ItemList.js'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
@@ -10,7 +10,7 @@ export default class VendorDetailsScreen extends Component {
     return (
       <View style={styles.mainContainer}>
         <ScrollView style={styles.container}>
-          <VendorList />
+          <ItemList />
         </ScrollView>
       </View>
     )

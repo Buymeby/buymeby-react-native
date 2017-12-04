@@ -37,7 +37,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  openVendorDetails: (vendor) => dispatch({ type: 'VendorSelected', vendor: vendor })
+  openVendorDetails: (vendor) => dispatch({ type: 'NavigateVendor', vendor: vendor })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(VendorList)

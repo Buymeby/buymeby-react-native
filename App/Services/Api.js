@@ -38,6 +38,7 @@ const create = (baseURL = 'http://localhost:8000/api/') => {
   const getRate = () => api.get('rate_limit')
   const getUser = (username) => api.get('search/users', {q: username})
   const getVendors = () => api.get('vendors')
+  const getVendor = (vendor) => api.get('vendors/' + vendor.cuid)
 
   // ------
   // STEP 3
@@ -56,7 +57,8 @@ const create = (baseURL = 'http://localhost:8000/api/') => {
     getRoot,
     getRate,
     getUser,
-    getVendors
+    getVendors,
+    getVendor
   }
 }
 
