@@ -2,7 +2,7 @@
 import apisauce from 'apisauce'
 
 // our "constructor"
-const create = (baseURL = 'http://localhost:8000/api/') => {
+const create = (baseURL = 'http://localhost:3000/api/') => {
   // ------
   // STEP 1
   // ------
@@ -37,8 +37,8 @@ const create = (baseURL = 'http://localhost:8000/api/') => {
   const getRoot = () => api.get('')
   const getRate = () => api.get('rate_limit')
   const getUser = (username) => api.get('search/users', {q: username})
-  const getVendors = () => api.get('vendors')
-  const getVendor = (vendor) => api.get('vendors/' + vendor.cuid)
+  const getVendors = () => api.get('retailers')
+  const getVendor = (vendor) => api.get('retailers/' + vendor.cuid)
 
   // ------
   // STEP 3

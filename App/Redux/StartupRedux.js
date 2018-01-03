@@ -28,6 +28,7 @@ export const startup = (state) => {
 }
 
 export const success = (state, action) => {
+  console.tron.log(action)
   const { vendors } = action
   const locations = vendors.map(v => ({
     title: v.name,

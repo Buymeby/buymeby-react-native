@@ -21,26 +21,6 @@ import {
 class ItemList extends Component {
 
   renderRow(rowData, sectionId, index) {
-    // rowData contains grouped data for one row,
-    // so we need to remap it into cells and pass to GridRow
-
-    if (index === '0') {
-      return (
-        <TouchableOpacity key={index}>
-          <Image
-            styleName="large"
-            source={{ uri: "https://allshecooks.com/wp-content/uploads/2016/08/CRUSHED-TOMATOES-RECIPE.jpg" }}
-          >
-            <Tile>
-              <Title styleName="md-gutter-bottom">{rowData[0].name}</Title>
-              <Subtitle styleName="sm-gutter-horizontal">{rowData[0].description}</Subtitle>
-            </Tile>
-          </Image>
-          <Divider styleName="line" />
-        </TouchableOpacity>
-      );
-    }
-
     const cellViews = rowData.map((item, id) => {
     return (
         <TouchableOpacity key={id} styleName="flexible">
@@ -60,23 +40,14 @@ class ItemList extends Component {
       );
     });
     return (
-      <GridRow columns={3}>
+      <GridRow columns={2}>
         {cellViews}
       </GridRow>
     );
   }
 
   render() {
-    console.tron.log(this.props.items)
-    // Group the restaurants into rows with 2 columns, except for the
-    // first article. The first article is treated as a featured article
-    let isFirstArticle = true;
-    const groupedData = GridRow.groupByRows(this.props.items, 3, () => {
-      if (isFirstArticle) {
-        isFirstArticle = false;
-        return 3;
-      }
-
+    const groupedData = GridRow.groupByRows(this.props.items, 2, () => {
       return 1;
     });
     return (
