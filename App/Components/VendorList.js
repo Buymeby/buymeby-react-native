@@ -31,7 +31,7 @@ class VendorList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    vendors: state.startup.vendors,
+    vendors: state.vendor.vendors,
     navigation: state.nav
   }
 }

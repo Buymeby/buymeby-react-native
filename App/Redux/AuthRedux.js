@@ -30,7 +30,7 @@ export const INITIAL_STATE = Immutable({
   authenticating: false,
   authentication_failed: null,
   registering: false,
-  registration_failed: null
+  registration_failed: null,
   verifying_token: false,
   token_verification_failed: null
 })

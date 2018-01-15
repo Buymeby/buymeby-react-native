@@ -14,8 +14,8 @@ import { AuthTypes } from '../Redux/AuthRedux'
 
 import { startup } from './StartupSagas'
 import { getUserAvatar } from './GithubSagas'
-import { getVendor } from './VendorSagas'
-import { register, login } from './AuthSagas'
+import { getVendor, getVendorList } from './VendorSagas'
+import { register, login, verifyToken } from './AuthSagas'
 
 /* ------------- API ------------- */
 
@@ -29,8 +29,10 @@ export default function * root () {
   yield all([
     takeLatest(StartupTypes.STARTUP, startup, api),
     takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api),
+    takeLatest(VendorTypes.VENDOR_LIST_REQUEST, getVendorList, api),
     takeLatest('NavigateVendor', getVendor, api),
     takeLatest(AuthTypes.LOGIN_REQUEST, login, api),
+    takeLatest(AuthTypes.TOKEN_REQUEST, verifyToken, api),
     takeLatest(AuthTypes.REGISTRATION_REQUEST, register, api)
   ])
 }

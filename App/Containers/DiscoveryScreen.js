@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View } from 'react-native'
-import VendorLocator from '../Components/VendorLocator.js'
-import VendorList from '../Components/VendorList.js'
+import VendorActions from '../Redux/VendorRedux'
+import VendorLocator from '../Components/VendorLocator'
+import VendorList from '../Components/VendorList'
+import { connect } from 'react-redux'
 
 import { Images } from '../Themes'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 
-export default class DiscoveryScreen extends Component {
+class DiscoveryScreen extends Component {
   render () {
+    this.props.getVendorList()
+
     return (
       <View style={styles.mainContainer}>
         <ScrollView style={styles.container}>
@@ -20,3 +24,9 @@ export default class DiscoveryScreen extends Component {
     )
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  getVendorList: () => dispatch(VendorActions.vendorListRequest())
+})
+
+export default connect(null, mapDispatchToProps)(DiscoveryScreen)

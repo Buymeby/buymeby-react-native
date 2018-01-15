@@ -23,13 +23,13 @@ const authHeaderKeys: Array<string> = [
 ]
 
 export function * verifyToken (api, action) {
-  if (await AsyncStorage.getItem('access-token')) {
+  if (AsyncStorage.getItem('access-token')) {
     const tokenParams = {
-      'access-token': await AsyncStorage.getItem('access-token') as string,
-      client: await AsyncStorage.getItem('client') as string,
-      uid: await AsyncStorage.getItem('uid') as string,
+      'access-token': AsyncStorage.getItem('access-token'),
+      'client': AsyncStorage.getItem('client'),
+      'uid': AsyncStorage.getItem('uid')
     }
-
+    console.tron.log(tokenParams)
     const response = yield call(api.verifyToken, tokenParams)
 
     if (response.ok) {

@@ -1,4 +1,5 @@
 import { createReducer, createActions } from 'reduxsauce'
+import { calculateRegion } from '../Lib/MapHelpers'
 import Immutable from 'seamless-immutable'
 
 /* ------------- Types and Action Creators ------------- */
@@ -6,7 +7,10 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   vendorRequest: ['data'],
   vendorSuccess: ['vendor'],
-  vendorFailure: null
+  vendorFailure: null,
+  vendorListRequest: null,
+  vendorListSuccess: ['vendors'],
+  vendorListFailure: null
 })
 
 export const VendorTypes = Types
@@ -20,29 +24,53 @@ export const INITIAL_STATE = Immutable({
   selected_vendor: {
     items: []
   },
+  vendors: [],
+  longitude: null,
+  latitude: null,
+  locations: [],
+  region: {},
   error: null
 })
 
 /* ------------- Reducers ------------- */
 
-// request the data from an api
 export const request = (state, { data }) =>
   state.merge({ fetching: true, data, payload: null })
 
-// successful api lookup
 export const success = (state, action) => {
   const { vendor } = action
   return state.merge({ fetching: false, error: null, selected_vendor: vendor })
 }
 
-// Something went wrong somewhere.
 export const failure = state =>
   state.merge({ fetching: false, error: true, payload: null })
+
+export const listRequest = (state) =>
+  state.merge({ fetching: true })
+
+export const listSuccess = (state, action) => {
+  console.tron.log(action)
+  const { vendors } = action
+  const locations = vendors.map(v => ({
+    title: v.name,
+    latitude: Number(v.latitude),
+    longitude: Number(v.longitude)
+  }))
+  const region = calculateRegion(locations, { latPadding: 0.1, longPadding: 0.1 })
+
+  return state.merge({ fetching: false, error: null, vendors, locations, region })
+}
+
+export const listFailure = state =>
+  state.merge({ fetching: false, error: true })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.VENDOR_REQUEST]: request,
   [Types.VENDOR_SUCCESS]: success,
-  [Types.VENDOR_FAILURE]: failure
+  [Types.VENDOR_FAILURE]: failure,
+  [Types.VENDOR_LIST_REQUEST]: listRequest,
+  [Types.VENDOR_LIST_SUCCESS]: listSuccess,
+  [Types.VENDOR_LIST_FAILURE]: listFailure
 })

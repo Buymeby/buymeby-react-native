@@ -12,6 +12,7 @@
 
 import { call, put } from 'redux-saga/effects'
 import VendorActions from '../Redux/VendorRedux'
+import { path } from 'ramda'
 
 export function * getVendor (api, action) {
   const { vendor } = action
@@ -23,5 +24,18 @@ export function * getVendor (api, action) {
     yield put(VendorActions.vendorSuccess(response.data.vendor))
   } else {
     yield put(VendorActions.vendorFailure())
+  }
+}
+
+export function * getVendorList (api) {
+
+  const response = yield call(api.getVendors)
+
+  if (response.ok) {
+    const vendors = path(['data'], response)
+    yield put(VendorActions.vendorListSuccess(vendors))
+  } else {
+    yield put(VendorACTIONS.vendorListFailure())
+    return
   }
 }

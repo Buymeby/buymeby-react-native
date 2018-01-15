@@ -43,7 +43,7 @@ const create = (baseURL = 'http://localhost:3000/api/') => {
 
   const registerUser = (userAttributes) => api.post('auth', userAttributes)
   const loginUser = (credentials) => api.post('auth/sign_in', credentials)
-  const verifyToken = () => api.get('auth/validate_token', tokenParams)
+  const verifyToken = (tokenParams) => api.get('auth/validate_token', tokenParams)
 
   // ------
   // STEP 3
