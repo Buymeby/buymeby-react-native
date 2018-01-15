@@ -8,12 +8,14 @@ import DebugConfig from '../Config/DebugConfig'
 import { StartupTypes } from '../Redux/StartupRedux'
 import { GithubTypes } from '../Redux/GithubRedux'
 import { VendorTypes } from '../Redux/VendorRedux'
+import { AuthTypes } from '../Redux/AuthRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { getUserAvatar } from './GithubSagas'
 import { getVendor } from './VendorSagas'
+import { register, login } from './AuthSagas'
 
 /* ------------- API ------------- */
 
@@ -27,6 +29,8 @@ export default function * root () {
   yield all([
     takeLatest(StartupTypes.STARTUP, startup, api),
     takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api),
-    takeLatest('NavigateVendor', getVendor, api)
+    takeLatest('NavigateVendor', getVendor, api),
+    takeLatest(AuthTypes.LOGIN_REQUEST, login, api),
+    takeLatest(AuthTypes.REGISTRATION_REQUEST, register, api)
   ])
 }

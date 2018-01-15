@@ -37,8 +37,13 @@ const create = (baseURL = 'http://localhost:3000/api/') => {
   const getRoot = () => api.get('')
   const getRate = () => api.get('rate_limit')
   const getUser = (username) => api.get('search/users', {q: username})
+
   const getVendors = () => api.get('retailers')
   const getVendor = (vendor) => api.get('retailers/' + vendor.cuid)
+
+  const registerUser = (userAttributes) => api.post('auth', userAttributes)
+  const loginUser = (credentials) => api.post('auth/sign_in', credentials)
+  const verifyToken = () => api.get('auth/validate_token', tokenParams)
 
   // ------
   // STEP 3
@@ -52,13 +57,17 @@ const create = (baseURL = 'http://localhost:3000/api/') => {
   // because it is scoped privately.  This is one way to create truly
   // private scoped goodies in JavaScript.
   //
+  const config = api
   return {
     // a list of the API functions from step 2
     getRoot,
     getRate,
     getUser,
     getVendors,
-    getVendor
+    getVendor,
+    registerUser,
+    loginUser,
+    config
   }
 }
 

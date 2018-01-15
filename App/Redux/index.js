@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
+import { reduxTokenAuthReducer } from 'redux-token-auth'
 import configureStore from './CreateStore'
 import rootSaga from '../Sagas/'
 
@@ -8,7 +10,9 @@ export const reducers = combineReducers({
   github: require('./GithubRedux').reducer,
   startup: require('./StartupRedux').reducer,
   vendor: require('./VendorRedux').reducer,
-  search: require('./SearchRedux').reducer
+  search: require('./SearchRedux').reducer,
+  form: formReducer,
+  reduxTokenAuth: reduxTokenAuthReducer
 })
 
 export default () => {

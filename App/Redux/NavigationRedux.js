@@ -17,6 +17,12 @@ const assignHeaderState = (state) => {
 export const reducer = (state, action) => {
   let newState
   switch (action.type) {
+    case 'NavigateDiscovery':
+      newState = AppNavigation.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'DiscoveryScreen'}),
+        Object.assign(state, { vendor: action.vendor })
+      )
+      break
     case 'NavigateVendor':
       newState = AppNavigation.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'VendorDetailsScreen'}),
