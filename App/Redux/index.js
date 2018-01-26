@@ -7,6 +7,7 @@ import rootSaga from '../Sagas/'
 /* ------------- Assemble The Reducers ------------- */
 export const reducers = combineReducers({
   nav: require('./NavigationRedux').reducer,
+  cart: require('./CartRedux').reducer,
   github: require('./GithubRedux').reducer,
   startup: require('./StartupRedux').reducer,
   vendor: require('./VendorRedux').reducer,

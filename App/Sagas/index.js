@@ -9,6 +9,7 @@ import { StartupTypes } from '../Redux/StartupRedux'
 import { GithubTypes } from '../Redux/GithubRedux'
 import { VendorTypes } from '../Redux/VendorRedux'
 import { AuthTypes } from '../Redux/AuthRedux'
+import { CartTypes } from '../Redux/CartRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -16,6 +17,7 @@ import { startup } from './StartupSagas'
 import { getUserAvatar } from './GithubSagas'
 import { getVendor, getVendorList } from './VendorSagas'
 import { register, login, verifyToken } from './AuthSagas'
+import { initializeCart } from './CartSagas'
 
 /* ------------- API ------------- */
 
@@ -28,6 +30,7 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 export default function * root () {
   yield all([
     takeLatest(StartupTypes.STARTUP, startup, api),
+    takeLatest(CartTypes.INITIALIZE, initializeCart),
     takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api),
     takeLatest(VendorTypes.VENDOR_LIST_REQUEST, getVendorList, api),
     takeLatest('NavigateVendor', getVendor, api),
