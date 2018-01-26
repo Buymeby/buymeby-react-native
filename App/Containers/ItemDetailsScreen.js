@@ -30,7 +30,7 @@ class ItemDetailsScreen extends Component {
         <ScrollView>
           <Image
             styleName="featured"
-            source={{ uri: 'https://allshecooks.com/wp-content/uploads/2016/08/CRUSHED-TOMATOES-RECIPE.jpg' }}
+            source={{ uri: item.image_src }}
             >
             <Tile>
               <Title>{item.name}</Title>
