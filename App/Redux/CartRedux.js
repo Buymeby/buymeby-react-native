@@ -6,7 +6,10 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   initialize: null,
   initializeSuccess: ['cart', 'cart_count'],
-  initializeFailure: null
+  initializeFailure: null,
+  add: ['vendor_id', 'item_id', 'quantity'],
+  addSuccess: ['cart', 'cart_count'],
+  addFailure: null
 })
 
 export const CartTypes = Types
@@ -17,14 +20,14 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   cart: null,
   cart_count: null,
-  accessing: false,
+  performing: false,
   error: false
 })
 
 /* ------------- Reducers ------------- */
 
 export const initialize = (state, action) =>
-  state.merge({ accessing: true })
+  state.merge({ performing: true })
 
 export const initializeSuccess = (state, action) => {
   const { cart, cart_count } = action
@@ -32,12 +35,26 @@ export const initializeSuccess = (state, action) => {
 }
 
 export const initializeFailure = (state) =>
-  state.merge({ accessing: false, error: true })
+  state.merge({ performing: false, error: true })
+
+export const add = (state, action) =>
+  state.merge({ performing: true })
+
+export const addSuccess = (state, action) => {
+  const { cart, cart_count } = action
+  return state.merge({ fetching: false, error: null, cart, cart_count })
+}
+
+export const addFailure = (state) =>
+  state.merge({ performing: false, error: true })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.INITIALIZE]: initialize,
   [Types.INITIALIZE_SUCCESS]: initializeSuccess,
-  [Types.INITIALIZE_FAILURE]: initializeFailure
+  [Types.INITIALIZE_FAILURE]: initializeFailure,
+  [Types.ADD]: add,
+  [Types.ADD_SUCCESS]: addSuccess,
+  [Types.ADD_FAILURE]: addFailure
 })

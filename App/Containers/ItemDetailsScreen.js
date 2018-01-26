@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import CartActions from '../Redux/CartRedux'
 import {
   Screen,
   ScrollView,
@@ -24,6 +25,7 @@ import styles from './Styles/LaunchScreenStyles'
 class ItemDetailsScreen extends Component {
   render () {
     const item = this.props.item
+    const vendor = this.props.vendor
 
     return (
       <View>
@@ -44,7 +46,7 @@ class ItemDetailsScreen extends Component {
               <Caption>{item.category}</Caption>
               <Caption>{item.quantity} available</Caption>
             </View>
-            <Button styleName="md-gutter-top"><Text>Add to Cart</Text></Button>
+            <Button styleName="md-gutter-top" onPress={this.props.addToCart.bind(this, vendor.id, item.id)}><Text>Add to Cart</Text></Button>
           </View>
         </ScrollView>
       </View>
@@ -54,12 +56,13 @@ class ItemDetailsScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    item: state.nav.item
+    item: state.nav.item,
+    vendor: state.nav.vendor
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  openItemDetails: (item) => dispatch({ type: 'NavigateItem', item: item })
+  addToCart: (vendor_id, item_id) => dispatch(CartActions.add(vendor_id, item_id, 2))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemDetailsScreen)

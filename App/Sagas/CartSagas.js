@@ -27,12 +27,43 @@ export function * initializeCart (action) {
   }
 
   cart_count = countCartItems(cart)
-  console.tron.log(cart_count)
   if (Number.isInteger(cart_count) && cart_count >= 0) {
     yield put(CartActions.initializeSuccess(cart, cart_count))
   }
   else {
     yield put(CartActions.initializeFailure())
+  }
+}
+
+export function * addToCart (action) {
+  const { vendor_id, item_id, quantity } = action
+
+  let initial_cart = JSON.parse(yield call([AsyncStorage, 'getItem'], 'cart'))
+
+  if (!initial_cart) {
+    yield put(CartActions.initialize())
+  }
+
+  let initial_cart_count = countCartItems(initial_cart)
+
+  if (!initial_cart[vendor_id]) {
+    initial_cart[vendor_id] = {}
+  }
+
+  if (!initial_cart[vendor_id][item_id]) {
+    initial_cart[vendor_id][item_id] = quantity
+  } else {
+    initial_cart[vendor_id][item_id] += quantity
+  }
+
+  yield call([AsyncStorage, 'setItem'], 'cart', JSON.stringify(initial_cart))
+  let updated_cart = JSON.parse(yield call([AsyncStorage, 'getItem'], 'cart'))
+  let updated_cart_count = countCartItems(updated_cart)
+
+  if (initial_cart_count + quantity == updated_cart_count) {
+    yield put(CartActions.addSuccess(cart, updated_cart_count))
+  } else {
+    yield put(CartActions.addFailure())
   }
 }
 
