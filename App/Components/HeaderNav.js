@@ -29,7 +29,7 @@ class HeaderNav extends Component {
           style: { color: '#fff' }
         }}
         rightComponent={{
-          icon: 'home',
+          icon: 'shopping-cart',
           color: '#fff',
           onPress: () => alert('ea')
         }}

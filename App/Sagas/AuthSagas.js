@@ -12,6 +12,7 @@
 
 import { call, put } from 'redux-saga/effects'
 import AuthActions from '../Redux/AuthRedux'
+import StartupActions from '../Redux/StartupRedux'
 import { AsyncStorage } from 'react-native'
 
 const authHeaderKeys: Array<string> = [
@@ -25,9 +26,9 @@ const authHeaderKeys: Array<string> = [
 export function * verifyToken (api, action) {
   if (AsyncStorage.getItem('access-token')) {
     const tokenParams = {
-      'access-token': AsyncStorage.getItem('access-token'),
-      'client': AsyncStorage.getItem('client'),
-      'uid': AsyncStorage.getItem('uid')
+      'access-token': yield call([AsyncStorage, 'getItem'], 'access-token'),
+      'client': yield call([AsyncStorage, 'getItem'], 'client'),
+      'uid': yield call([AsyncStorage, 'getItem'], 'uid')
     }
     console.tron.log(tokenParams)
     const response = yield call(api.verifyToken, tokenParams)
@@ -35,6 +36,7 @@ export function * verifyToken (api, action) {
     if (response.ok) {
       setAuthHeaders(response.headers, api)
       persistAuthHeadersInDeviceStorage(response.headers)
+      yield put(StartupActions.startupSuccess(response.data))
       yield put(AuthActions.tokenSuccess(response.data))
       yield put({ type: 'NavigateDiscovery' })
     } else {

@@ -38,8 +38,8 @@ const create = (baseURL = 'http://localhost:3000/api/') => {
   const getRate = () => api.get('rate_limit')
   const getUser = (username) => api.get('search/users', {q: username})
 
-  const getVendors = () => api.get('retailers')
-  const getVendor = (vendor) => api.get('retailers/' + vendor.cuid)
+  const getVendors = () => api.get('vendors')
+  const getVendor = (vendor) => api.get('vendors/' + vendor.id)
 
   const registerUser = (userAttributes) => api.post('auth', userAttributes)
   const loginUser = (credentials) => api.post('auth/sign_in', credentials)
@@ -67,6 +67,7 @@ const create = (baseURL = 'http://localhost:3000/api/') => {
     getVendor,
     registerUser,
     loginUser,
+    verifyToken,
     config
   }
 }

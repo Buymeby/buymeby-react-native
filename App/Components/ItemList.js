@@ -2,16 +2,12 @@ import React, { Component } from 'react'
 import styles from './Styles/ItemListStyle'
 import { connect } from 'react-redux'
 import {
+  Screen,
   ScrollView,
   GridRow,
-  Text,
-  Screen,
   TouchableOpacity,
   Image,
-  Tile,
-  Title,
   Subtitle,
-  Divider,
   Card,
   View,
   Caption,
@@ -20,19 +16,29 @@ import {
 
 class ItemList extends Component {
 
-  renderRow(rowData, sectionId, index) {
+  constructor(props) {
+    super(props);
+    this.renderRow = this.renderRow.bind(this);
+  }
+
+  renderRow(rowData) {
+    const { openItemDetails } = this.props;
+
     const cellViews = rowData.map((item, id) => {
-    return (
-        <TouchableOpacity key={id} styleName="flexible">
+      return (
+        <TouchableOpacity styleName="flexible" onPress={() => openItemDetails(item)}>
           <Card styleName="flexible">
             <Image
               styleName="medium-wide"
               source={{ uri: "https://allshecooks.com/wp-content/uploads/2016/08/CRUSHED-TOMATOES-RECIPE.jpg"  }}
             />
             <View styleName="content">
-              <Subtitle numberOfLines={3}>{item.name}</Subtitle>
-              <View styleName="horizontal">
-                <Caption styleName="collapsible" numberOfLines={2}>{item.description}</Caption>
+              <Subtitle numberOfLines={2}>{item.name}</Subtitle>
+              <View styleName="horizontal v-center space-between">
+                <View styleName="horizontal">
+                  <Caption styleName="md-gutter-right">${item.price}/{item.unit}</Caption>
+                  <Caption styleName="line-through">${item.price}</Caption>
+                </View>
               </View>
             </View>
           </Card>
@@ -54,7 +60,7 @@ class ItemList extends Component {
       <Screen>
         <ListView
           data={groupedData}
-          renderRow={this.renderRow}
+          renderRow={(rowData) => this.renderRow(rowData)}
         />
       </Screen>
     );
@@ -68,7 +74,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  openVendorDetails: (vendor) => dispatch({ type: 'NavigateVendor', vendor: vendor })
+  openItemDetails: (item) => dispatch({ type: 'NavigateItem', item: item })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemList)

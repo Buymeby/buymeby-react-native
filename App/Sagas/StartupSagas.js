@@ -4,5 +4,5 @@ import AuthActions from '../Redux/AuthRedux'
 import { path } from 'ramda'
 
 export function * startup (api) {
-  // yield put(AuthActions.tokenRequest());
+  yield put(AuthActions.tokenRequest());
 }

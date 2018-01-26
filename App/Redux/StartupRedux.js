@@ -14,13 +14,8 @@ export const StartupTypes = Types
 export default Creators
 
 export const INITIAL_STATE = Immutable({
-  longitude: null,
-  latitude: null,
-  vendors: [],
   startup_complete: false,
-  error: null,
-  locations: [],
-  region: {}
+  error: null
 })
 
 export const startup = (state) => {
@@ -29,15 +24,8 @@ export const startup = (state) => {
 
 export const success = (state, action) => {
   console.tron.log(action)
-  const { vendors } = action
-  const locations = vendors.map(v => ({
-    title: v.name,
-    latitude: Number(v.latitude),
-    longitude: Number(v.longitude)
-  }))
-  const region = calculateRegion(locations, { latPadding: 0.1, longPadding: 0.1 })
 
-  return state.merge({ startup_complete: true, error: null, vendors, locations, region })
+  return state.merge({ startup_complete: true, error: null })
 }
 
 export const failure = (state) => {

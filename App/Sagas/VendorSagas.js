@@ -21,7 +21,7 @@ export function * getVendor (api, action) {
 
   // success?
   if (response.ok) {
-    yield put(VendorActions.vendorSuccess(response.data.vendor))
+    yield put(VendorActions.vendorSuccess(response.data))
   } else {
     yield put(VendorActions.vendorFailure())
   }

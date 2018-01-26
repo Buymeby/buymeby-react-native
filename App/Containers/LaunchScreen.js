@@ -3,6 +3,7 @@ import { ScrollView, Text, Image, View } from 'react-native'
 import { connect } from 'react-redux'
 import AuthActions from '../Redux/AuthRedux'
 import LoginForm from '../Components/LoginForm.js'
+import RegistrationForm from '../Components/RegistrationForm.js'
 
 import { Images } from '../Themes'
 
@@ -11,14 +12,14 @@ import styles from './Styles/LaunchScreenStyles'
 
 class LaunchScreen extends Component {
   handleLoginSubmit = (values) => {
-    this.props.login(values)
+    this.props.register(values)
   }
 
   render () {
     return (
       <View style={styles.mainContainer}>
         <ScrollView style={styles.container}>
-          <LoginForm onSubmit={this.handleLoginSubmit} />
+          <RegistrationForm onSubmit={this.handleLoginSubmit} />
           <Text style={styles.sectionText}>
           {`
 Not a member? Register Here

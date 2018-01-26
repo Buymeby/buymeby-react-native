@@ -4,11 +4,14 @@ import { NavigationActions } from 'react-navigation'
 const assignHeaderState = (state) => {
   let newScreen = state.routes[state.index].routeName
   let vendor = state.vendor
+  let item = state.item
   switch(newScreen) {
     case 'LaunchScreen':
       return Object.assign(state, { headerText: 'Buymeby', icon: 'menu' })
     case 'VendorDetailsScreen':
       return Object.assign(state, { headerText: vendor.name, icon: 'chevron-left' })
+    case 'ItemDetailsScreen':
+      return Object.assign(state, { headerText: item.name, icon: 'chevron-left' })
     default:
       return Object.assign(state, { headerText: 'Buymeby', icon: 'menu' })
   }
@@ -27,6 +30,12 @@ export const reducer = (state, action) => {
       newState = AppNavigation.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'VendorDetailsScreen'}),
         Object.assign(state, { vendor: action.vendor })
+      )
+      break
+    case 'NavigateItem':
+      newState = AppNavigation.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'ItemDetailsScreen'}),
+        Object.assign(state, { item: action.item })
       )
       break
     case 'NavigateBack':
