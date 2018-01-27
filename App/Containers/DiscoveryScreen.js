@@ -11,9 +11,11 @@ import { Images } from '../Themes'
 import styles from './Styles/LaunchScreenStyles'
 
 class DiscoveryScreen extends Component {
-  render () {
+  componentWillMount() {
     this.props.getVendorList()
+  }
 
+  render () {
     return (
       <View style={styles.mainContainer}>
         <ScrollView style={styles.container}>

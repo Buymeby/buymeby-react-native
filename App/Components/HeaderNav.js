@@ -4,6 +4,7 @@ import { View, Text } from 'react-native'
 import styles from './Styles/HeaderNavStyle'
 import { Header } from 'react-native-elements'
 import { connect } from 'react-redux'
+import CartActions from '../Redux/CartRedux'
 
 class HeaderNav extends Component {
   _onPressLeftIcon () {
@@ -31,7 +32,7 @@ class HeaderNav extends Component {
         rightComponent={{
           icon: 'shopping-cart',
           color: '#fff',
-          onPress: () => alert('ea')
+          onPress: () => this.props.getCartItems()
         }}
       />
     )
@@ -46,7 +47,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  navigateBack: () => dispatch({ type: 'NavigateBack' })
+  navigateBack: () => dispatch({ type: 'NavigateBack' }),
+  getCartItems: () => dispatch(CartActions.populate())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderNav)

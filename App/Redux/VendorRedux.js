@@ -28,7 +28,7 @@ export const INITIAL_STATE = Immutable({
   longitude: null,
   latitude: null,
   locations: [],
-  region: {},
+  region: null,
   error: null
 })
 

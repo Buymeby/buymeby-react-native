@@ -35,6 +35,23 @@ export function * initializeCart (action) {
   }
 }
 
+export function * populateCart (api, action) {
+  cart = JSON.parse(yield call([AsyncStorage, 'getItem'], 'cart'))
+
+  if (!cart) {
+    yield put(CartActions.initialize())
+  }
+
+  const response = yield call(api.populateCart, cart)
+
+  if (response.ok) {
+    const populated_cart = JSON.parse(response.data.populated_cart)
+    yield put(CartActions.populateSuccess(populated_cart))
+  } else {
+    yield put(CartActions.populateFailure())
+  }
+}
+
 export function * addToCart (action) {
   const { vendor_id, item_id, quantity } = action
 

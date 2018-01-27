@@ -9,7 +9,10 @@ const { Types, Creators } = createActions({
   initializeFailure: null,
   add: ['vendor_id', 'item_id', 'quantity'],
   addSuccess: ['cart', 'cart_count'],
-  addFailure: null
+  addFailure: null,
+  populate: null,
+  populateSuccess: ['populated_cart'],
+  populateFailure: null
 })
 
 export const CartTypes = Types
@@ -21,7 +24,8 @@ export const INITIAL_STATE = Immutable({
   cart: null,
   cart_count: null,
   performing: false,
-  error: false
+  error: false,
+  populated_cart: null
 })
 
 /* ------------- Reducers ------------- */
@@ -48,6 +52,17 @@ export const addSuccess = (state, action) => {
 export const addFailure = (state) =>
   state.merge({ performing: false, error: true })
 
+export const populate = (state, action) =>
+  state.merge({ performing: true })
+
+export const populateSuccess = (state, action) => {
+  const { populated_cart } = action
+  return state.merge({ fetching: false, error: null, populated_cart })
+}
+
+export const populateFailure = (state) =>
+  state.merge({ performing: false, error: true })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -56,5 +71,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.INITIALIZE_FAILURE]: initializeFailure,
   [Types.ADD]: add,
   [Types.ADD_SUCCESS]: addSuccess,
-  [Types.ADD_FAILURE]: addFailure
+  [Types.ADD_FAILURE]: addFailure,
+  [Types.POPULATE]: populate,
+  [Types.POPULATE_SUCCESS]: populateSuccess,
+  [Types.POPULATE_FAILURE]: populateFailure
 })
