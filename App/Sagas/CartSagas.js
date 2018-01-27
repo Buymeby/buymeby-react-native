@@ -3,7 +3,7 @@ import CartActions from '../Redux/CartRedux'
 import { AsyncStorage } from 'react-native'
 import _ from 'lodash'
 
-// Cart object looks as follow:
+// Cart looks as follows:
 //   {
 //     vendor_id: {
 //       item_id: quantity,

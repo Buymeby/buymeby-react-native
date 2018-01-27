@@ -32,7 +32,7 @@ class HeaderNav extends Component {
         rightComponent={{
           icon: 'shopping-cart',
           color: '#fff',
-          onPress: () => this.props.getCartItems()
+          onPress: () => this.props.navigateCart()
         }}
       />
     )
@@ -48,7 +48,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   navigateBack: () => dispatch({ type: 'NavigateBack' }),
-  getCartItems: () => dispatch(CartActions.populate())
+  navigateCart: () => dispatch({ type: 'NavigateCart' })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderNav)

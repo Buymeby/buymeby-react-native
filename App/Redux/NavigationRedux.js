@@ -12,6 +12,8 @@ const assignHeaderState = (state) => {
       return Object.assign(state, { headerText: vendor.name, icon: 'chevron-left' })
     case 'ItemDetailsScreen':
       return Object.assign(state, { headerText: item.name, icon: 'chevron-left' })
+    case 'CartScreen':
+      return Object.assign(state, { headerText: 'Cart', icon: 'chevron-left' })
     default:
       return Object.assign(state, { headerText: 'Buymeby', icon: 'menu' })
   }
@@ -24,6 +26,12 @@ export const reducer = (state, action) => {
       newState = AppNavigation.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'DiscoveryScreen'}),
         Object.assign(state, { vendor: action.vendor })
+      )
+      break
+    case 'NavigateCart':
+      newState = AppNavigation.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'CartScreen'}),
+        state
       )
       break
     case 'NavigateVendor':

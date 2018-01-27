@@ -1,6 +1,7 @@
 import { StackNavigator } from 'react-navigation'
 import LaunchScreen from '../Containers/LaunchScreen'
 import DiscoveryScreen from '../Containers/DiscoveryScreen'
+import CartScreen from '../Containers/CartScreen'
 import VendorDetailsScreen from '../Containers/VendorDetailsScreen'
 import ItemDetailsScreen from '../Containers/ItemDetailsScreen'
 
@@ -15,6 +16,10 @@ const PrimaryNav = StackNavigator({
   DiscoveryScreen: {
     screen: DiscoveryScreen,
     navigationOptions: { title: 'Buymeby'}
+  },
+  CartScreen: {
+    screen: CartScreen,
+    navigationOptions: { title: 'Cart' }
   },
   VendorDetailsScreen: { screen: VendorDetailsScreen },
   ItemDetailsScreen: { screen: ItemDetailsScreen }
