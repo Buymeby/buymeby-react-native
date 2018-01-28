@@ -3,6 +3,23 @@ import { List, ListItem } from 'react-native-elements'
 import { TouchableHighlight } from 'react-native'
 import Styles from './Styles/VendorListStyles'
 import { connect } from 'react-redux'
+import {
+  Screen,
+  Divider,
+  ScrollView,
+  GridRow,
+  TouchableOpacity,
+  Image,
+  Subtitle,
+  Card,
+  View,
+  Caption,
+  Row,
+  Button,
+  Icon,
+  Title
+} from '@shoutem/ui';
+
 
 class VendorList extends React.Component {
 
@@ -13,18 +30,26 @@ class VendorList extends React.Component {
     }
 
     return (
-      <List style={Styles.list}>
-        {
-          vendors.map((vendor, i) => (
-            <ListItem
-              key={i}
-              title={vendor.name}
-              subtitle={vendor.description}
-              onPress={this.props.openVendorDetails.bind(this, vendor)}
+      vendors.map((vendor, i) => (
+        <TouchableOpacity onPress={this.props.openVendorDetails.bind(this, vendor)}>
+          <Row key={i}>
+            <Image
+              styleName="small rounded-corners"
+              source={{ uri: vendor.image_src || " " }}
             />
-          ))
-        }
-      </List>
+            <View styleName="vertical stretch space-between">
+              <Subtitle>{vendor.name}</Subtitle>
+              <View styleName="horizontal">
+                <Caption>{vendor.description}</Caption>
+              </View>
+            </View>
+            <Button styleName="right-icon" onPress={this.props.openVendorDetails.bind(this, vendor)}>
+              <Icon name="right-arrow"/>
+            </Button>
+          </Row>
+          <Divider styleName="line" />
+        </TouchableOpacity>
+      ))
     )
   }
 }
