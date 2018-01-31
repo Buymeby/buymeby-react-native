@@ -31,8 +31,8 @@ class VendorList extends React.Component {
 
     return (
       vendors.map((vendor, i) => (
-        <TouchableOpacity onPress={this.props.openVendorDetails.bind(this, vendor)}>
-          <Row key={i}>
+        <TouchableOpacity key={i} onPress={this.props.openVendorDetails.bind(this, vendor)}>
+          <Row>
             <Image
               styleName="small rounded-corners"
               source={{ uri: vendor.image_src || " " }}

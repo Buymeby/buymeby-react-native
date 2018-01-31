@@ -16,12 +16,14 @@ class DiscoveryScreen extends Component {
   }
 
   render () {
+    // <View style={styles.container}>
+    //   <VendorLocator />
+    // </View>
     return (
       <View style={styles.mainContainer}>
-        <ScrollView style={styles.container}>
-          <VendorLocator />
-          <VendorList />
-        </ScrollView>
+          <ScrollView>
+            <VendorList />
+          </ScrollView>
       </View>
     )
   }

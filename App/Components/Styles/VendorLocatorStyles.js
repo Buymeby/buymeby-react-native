@@ -4,6 +4,7 @@ import { ApplicationStyles } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
+    ...StyleSheet.absoluteFillObject,
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
@@ -12,6 +13,7 @@ export default StyleSheet.create({
   },
   map: {
     // For Android :/
+    ...StyleSheet.absoluteFillObject,
     position: 'absolute',
     top: 0,
     left: 0,

@@ -28,14 +28,14 @@ class CartItemList extends React.Component {
 
     return (
       populated_cart.map((vendor, i) => (
-        <View>
+        <View key={vendor.id}>
           <Row styleName="small">
             <Title>{vendor.name}</Title>
             <Icon styleName="disclosure" name="right-arrow" />
           </Row>
             {
               vendor.items.map((item, j) => (
-                <Row>
+                <Row key={vendor.id + '-' + item.id}>
                   <Image
                     styleName="small rounded-corners"
                     source={{ uri: item.image_src }}
@@ -58,7 +58,6 @@ class CartItemList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.tron.log(state)
   return {
     populated_cart: state.cart.populated_cart,
     cart: state.cart.cart

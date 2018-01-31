@@ -26,7 +26,7 @@ class ItemList extends Component {
 
     const cellViews = rowData.map((item, id) => {
       return (
-        <TouchableOpacity styleName="flexible" onPress={() => openItemDetails(item)}>
+        <TouchableOpacity styleName="flexible" key={item.id} onPress={() => openItemDetails(item)}>
           <Card styleName="flexible">
             <Image
               styleName="medium-wide"

@@ -49,7 +49,6 @@ export const listRequest = (state) =>
   state.merge({ fetching: true })
 
 export const listSuccess = (state, action) => {
-  console.tron.log(action)
   const { vendors } = action
   const locations = vendors.map(v => ({
     title: v.name,

@@ -61,6 +61,8 @@ class VendorLocator extends React.Component {
   }
 
   render () {
+    const vendors = this.props.vendors;
+
     return (
       <MapView
         style={Styles.container}
@@ -68,7 +70,7 @@ class VendorLocator extends React.Component {
         onRegionChangeComplete={this.onRegionChange}
         showsUserLocation={true}
       >
-        {this.props.vendors.map((vendor) => this.renderMapMarkers(vendor))}
+        {vendors.map((vendor) => this.renderMapMarkers(vendor))}
       </MapView>
     )
   }

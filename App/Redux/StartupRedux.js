@@ -23,8 +23,6 @@ export const startup = (state) => {
 }
 
 export const success = (state, action) => {
-  console.tron.log(action)
-
   return state.merge({ startup_complete: true, error: null })
 }
 
