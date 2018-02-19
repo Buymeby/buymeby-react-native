@@ -3,7 +3,7 @@ import CartActions from '../Redux/CartRedux'
 import { AsyncStorage } from 'react-native'
 import _ from 'lodash'
 
-// Cart looks as follows:
+// Cart looks as follow:
 //   {
 //     vendor_id: {
 //       item_id: quantity,
@@ -40,6 +40,8 @@ export function * populateCart (api, action) {
 
   if (!cart) {
     yield put(CartActions.initialize())
+  } else if (_.isEmpty(cart)) {
+    yield put(CartActions.emptyCart())
   }
 
   const response = yield call(api.populateCart, cart)
@@ -81,6 +83,40 @@ export function * addToCart (action) {
     yield put(CartActions.addSuccess(cart, updated_cart_count))
   } else {
     yield put(CartActions.addFailure())
+  }
+}
+
+export function * removeFromCart (action) {
+  const { vendor_id, item_id } = action
+
+  let initial_cart = JSON.parse(yield call([AsyncStorage, 'getItem'], 'cart'))
+
+  if (!initial_cart) {
+    yield put(CartActions.initialize())
+  }
+
+  let initial_cart_count = countCartItems(initial_cart)
+  let quantity_to_remove = 0
+
+  if (initial_cart_count > 0 && initial_cart[vendor_id][item_id]) {
+    quantity_to_remove = initial_cart[vendor_id][item_id]
+    delete initial_cart[vendor_id][item_id]
+  }
+
+  if (_.isEmpty(initial_cart[vendor_id])) {
+    delete initial_cart[vendor_id]
+  }
+
+  yield call([AsyncStorage, 'setItem'], 'cart', JSON.stringify(initial_cart))
+  let updated_cart = JSON.parse(yield call([AsyncStorage, 'getItem'], 'cart'))
+
+  let updated_cart_count = countCartItems(updated_cart)
+
+  if (initial_cart_count - quantity_to_remove == updated_cart_count) {
+    yield put(CartActions.removeSuccess(cart, updated_cart_count))
+    yield put(CartActions.populate())
+  } else {
+    yield put(CartActions.removeFailure())
   }
 }
 

@@ -10,9 +10,13 @@ const { Types, Creators } = createActions({
   add: ['vendor_id', 'item_id', 'quantity'],
   addSuccess: ['cart', 'cart_count'],
   addFailure: null,
+  remove: ['vendor_id', 'item_id'],
+  removeSuccess: ['cart', 'cart_count'],
+  removeFailure: null,
   populate: null,
   populateSuccess: ['populated_cart'],
-  populateFailure: null
+  populateFailure: null,
+  emptyCart: false
 })
 
 export const CartTypes = Types
@@ -52,6 +56,17 @@ export const addSuccess = (state, action) => {
 export const addFailure = (state) =>
   state.merge({ performing: false, error: true })
 
+export const remove = (state, action) =>
+  state.merge({ performing: true })
+
+export const removeSuccess = (state, action) => {
+  const { cart, cart_count } = action
+  return state.merge({ fetching: false, error: null, cart, cart_count })
+}
+
+export const removeFailure = (state) =>
+  state.merge({ performing: false, error: true })
+
 export const populate = (state, action) =>
   state.merge({ performing: true })
 
@@ -63,6 +78,10 @@ export const populateSuccess = (state, action) => {
 export const populateFailure = (state) =>
   state.merge({ performing: false, error: true })
 
+
+export const emptyCart = (state) =>
+  state.merge({ performing: false, emptyCart: true })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -72,7 +91,11 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ADD]: add,
   [Types.ADD_SUCCESS]: addSuccess,
   [Types.ADD_FAILURE]: addFailure,
+  [Types.REMOVE]: remove,
+  [Types.REMOVE_SUCCESS]: removeSuccess,
+  [Types.REMOVE_FAILURE]: removeFailure,
   [Types.POPULATE]: populate,
   [Types.POPULATE_SUCCESS]: populateSuccess,
-  [Types.POPULATE_FAILURE]: populateFailure
+  [Types.POPULATE_FAILURE]: populateFailure,
+  [Types.EMPTY_CART]: emptyCart
 })

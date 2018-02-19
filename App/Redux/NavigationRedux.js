@@ -11,7 +11,7 @@ const assignHeaderState = (state) => {
     case 'VendorDetailsScreen':
       return Object.assign(state, { headerText: vendor.name, icon: 'chevron-left' })
     case 'ItemDetailsScreen':
-      return Object.assign(state, { headerText: item.name, icon: 'chevron-left' })
+      return Object.assign(state, { headerText: vendor.name, icon: 'chevron-left' })
     case 'CartScreen':
       return Object.assign(state, { headerText: 'Cart', icon: 'chevron-left' })
     default:

@@ -17,7 +17,7 @@ import { startup } from './StartupSagas'
 import { getUserAvatar } from './GithubSagas'
 import { getVendor, getVendorList } from './VendorSagas'
 import { register, login, verifyToken } from './AuthSagas'
-import { initializeCart, addToCart, populateCart } from './CartSagas'
+import { initializeCart, addToCart, removeFromCart, populateCart } from './CartSagas'
 
 /* ------------- API ------------- */
 
@@ -36,6 +36,7 @@ export default function * root () {
     takeLatest(CartTypes.INITIALIZE, initializeCart),
     takeLatest(CartTypes.POPULATE, populateCart, api),
     takeLatest(CartTypes.ADD, addToCart),
+    takeLatest(CartTypes.REMOVE, removeFromCart),
     takeLatest(VendorTypes.VENDOR_LIST_REQUEST, getVendorList, api),
 
     takeLatest('NavigateVendor', getVendor, api)
