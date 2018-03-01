@@ -15,7 +15,8 @@ import {
   Row,
   Button,
   Icon,
-  Title
+  Title,
+  Text
 } from '@shoutem/ui';
 
 
@@ -24,8 +25,11 @@ class CartItemList extends React.Component {
   render () {
     const populated_cart = this.props.populated_cart;
     const cart = this.props.cart;
-    if (!populated_cart) {
-      return null;
+
+    if (!populated_cart || this.props.emptyCart) {
+      return (
+        <Text>Your cart is empty</Text>
+      )
     }
 
     return (
@@ -43,11 +47,12 @@ class CartItemList extends React.Component {
                     source={{ uri: item.image_src }}
                   />
                   <View styleName="vertical stretch space-between">
-                    <Subtitle>{item.name} | qty: {cart[vendor.id][item.id]}</Subtitle>
+                    <Subtitle>{item.name}</Subtitle>
                     <View styleName="horizontal">
                       <Subtitle styleName="md-gutter-right">${item.price}</Subtitle>
-                      <Caption styleName="line-through">${item.price}</Caption>
+                      <Caption styleName="line-through md-gutter-right">${item.price}</Caption>
                     </View>
+                    <Caption>Quantity: {cart[vendor.id][item.id]}</Caption>
                   </View>
                   <Button styleName="right-icon" onPress={this.props.removeFromCart.bind(this, vendor.id, item.id)}><Icon name="close"/></Button>
                 </Row>
@@ -62,7 +67,8 @@ class CartItemList extends React.Component {
 const mapStateToProps = (state) => {
   return {
     populated_cart: state.cart.populated_cart,
-    cart: state.cart.cart
+    cart: state.cart.cart,
+    emptyCart: state.cart.emptyCart
   }
 }
 

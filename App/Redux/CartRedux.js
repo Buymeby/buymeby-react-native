@@ -39,7 +39,7 @@ export const initialize = (state, action) =>
 
 export const initializeSuccess = (state, action) => {
   const { cart, cart_count } = action
-  return state.merge({ fetching: false, error: null, cart, cart_count })
+  return state.merge({ fetching: false, error: null, cart, cart_count, emptyCart: cart_count == 0 })
 }
 
 export const initializeFailure = (state) =>
@@ -50,7 +50,7 @@ export const add = (state, action) =>
 
 export const addSuccess = (state, action) => {
   const { cart, cart_count } = action
-  return state.merge({ fetching: false, error: null, cart, cart_count })
+  return state.merge({ fetching: false, error: null, cart, cart_count, emptyCart: false })
 }
 
 export const addFailure = (state) =>
@@ -72,7 +72,7 @@ export const populate = (state, action) =>
 
 export const populateSuccess = (state, action) => {
   const { populated_cart } = action
-  return state.merge({ fetching: false, error: null, populated_cart })
+  return state.merge({ fetching: false, error: null, populated_cart, emptyCart: false })
 }
 
 export const populateFailure = (state) =>

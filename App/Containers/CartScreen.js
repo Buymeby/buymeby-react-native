@@ -15,35 +15,18 @@ class CartScreen extends Component {
   }
 
   render () {
-    if (this.props.emptyCart) {
-      return (
-        <View style={styles.mainContainer}>
-          <ScrollView style={styles.container}>
-            <Text>Your cart is empty</Text>
-          </ScrollView>
-        </View>
-      )
-    } else {
-      return (
-        <View style={styles.mainContainer}>
-          <ScrollView style={styles.container}>
-            <CartItemList />
-          </ScrollView>
-        </View>
-      )
-    }
+    return (
+      <View style={styles.mainContainer}>
+        <ScrollView style={styles.container}>
+          <CartItemList />
+        </ScrollView>
+      </View>
+    )
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
   populateCart: () => dispatch(CartActions.populate())
 })
-
-const mapStateToProps = (state) => {
-  console.tron.log(state)
-  return {
-    emptyCart: state.cart.emptyCart
-  }
-}
 
 export default connect(null, mapDispatchToProps)(CartScreen)
