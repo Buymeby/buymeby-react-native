@@ -26,9 +26,11 @@ class CartItemList extends React.Component {
     const populated_cart = this.props.populated_cart;
     const cart = this.props.cart;
 
-    if (!populated_cart || this.props.emptyCart) {
+    if (!cart || !populated_cart || this.props.emptyCart) {
       return (
-        <Text>Your cart is empty</Text>
+        <View>
+          <Text>Your cart is empty</Text>
+        </View>
       )
     }
 

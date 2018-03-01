@@ -80,7 +80,7 @@ export function * addToCart (action) {
   let updated_cart_count = countCartItems(updated_cart)
 
   if (initial_cart_count + quantity == updated_cart_count) {
-    yield put(CartActions.addSuccess(cart, updated_cart_count))
+    yield put(CartActions.addSuccess(updated_cart, updated_cart_count))
   } else {
     yield put(CartActions.addFailure())
   }
@@ -117,6 +117,36 @@ export function * removeFromCart (action) {
     yield put(CartActions.populate())
   } else {
     yield put(CartActions.removeFailure())
+  }
+}
+
+export function * clearCart (action) {
+  yield call([AsyncStorage, 'setItem'], 'cart', JSON.stringify({}))
+  let cart = JSON.parse(yield call([AsyncStorage, 'getItem'], 'cart'))
+
+  let cart_count = countCartItems(cart)
+  if (cart_count == 0) {
+    yield put(CartActions.clearSuccess(cart, cart_count))
+  }
+  else {
+    yield put(CartActions.clearFailure())
+  }
+}
+
+export function * placeOrder (api, action) {
+  cart = JSON.parse(yield call([AsyncStorage, 'getItem'], 'cart'))
+
+  if (!cart) {
+    yield put(CartActions.orderFailure())
+  }
+
+  const response = yield call(api.placeOrder, cart)
+
+  if (response.ok) {
+    yield put(CartActions.orderSuccess())
+    yield put(CartActions.clear())
+  } else {
+    yield put(CartActions.orderFailure())
   }
 }
 

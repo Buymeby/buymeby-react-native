@@ -13,9 +13,15 @@ const { Types, Creators } = createActions({
   remove: ['vendor_id', 'item_id'],
   removeSuccess: ['cart', 'cart_count'],
   removeFailure: null,
+  clear: null,
+  clearSuccess: ['cart', 'cart_count'],
+  clearFailure: null,
   populate: null,
   populateSuccess: ['populated_cart'],
   populateFailure: null,
+  order: null,
+  orderSuccess: null,
+  orderFailure: null,
   emptyCart: false
 })
 
@@ -67,6 +73,17 @@ export const removeSuccess = (state, action) => {
 export const removeFailure = (state) =>
   state.merge({ performing: false, error: true })
 
+export const clear = (state, action) =>
+  state.merge({ performing: true })
+
+export const clearSuccess = (state, action) => {
+  const { cart, cart_count } = action
+  return state.merge({ fetching: false, error: null, cart, cart_count, populated_cart: null, empyuCart: true })
+}
+
+export const clearFailure = (state) =>
+  state.merge({ performing: false, error: true })
+
 export const populate = (state, action) =>
   state.merge({ performing: true })
 
@@ -76,6 +93,16 @@ export const populateSuccess = (state, action) => {
 }
 
 export const populateFailure = (state) =>
+  state.merge({ performing: false, error: true })
+
+export const order = (state, action) =>
+  state.merge({ performing: true })
+
+export const orderSuccess = (state, action) => {
+  return state.merge({ fetching: false, error: null})
+}
+
+export const orderFailure = (state) =>
   state.merge({ performing: false, error: true })
 
 
@@ -94,8 +121,14 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.REMOVE]: remove,
   [Types.REMOVE_SUCCESS]: removeSuccess,
   [Types.REMOVE_FAILURE]: removeFailure,
+  [Types.CLEAR]: clear,
+  [Types.CLEAR_SUCCESS]: clearSuccess,
+  [Types.CLEAR_FAILURE]: clearFailure,
   [Types.POPULATE]: populate,
   [Types.POPULATE_SUCCESS]: populateSuccess,
   [Types.POPULATE_FAILURE]: populateFailure,
+  [Types.ORDER]: order,
+  [Types.ORDER_SUCCESS]: orderSuccess,
+  [Types.ORDER_FAILURE]: orderFailure,
   [Types.EMPTY_CART]: emptyCart
 })

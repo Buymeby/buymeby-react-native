@@ -76,7 +76,9 @@ class ItemDetailsScreen extends Component {
                 valueProperty="value"
               />
             </Tile>
-            <Button onPress={this.props.addToCart.bind(this, vendor.id, item.id, selectedQuantity.value)}><Text>Add to Cart</Text></Button>
+            <Button onPress={this.props.addToCart.bind(this, vendor.id, item.id, selectedQuantity.value)}>
+              <Text>Add to Cart</Text>
+            </Button>
           </View>
         </ScrollView>
       </View>
