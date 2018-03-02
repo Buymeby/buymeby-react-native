@@ -52,6 +52,16 @@ export const reducer = (state, action) => {
         state
       )
       break
+    case 'OpenDrawer':
+      newState = AppNavigation.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'DrawerOpen' }),
+        state
+      )
+      console.tron.log({
+        state: state,
+        newState: newState
+      })
+      break
     default:
       newState = AppNavigation.router.getStateForAction(action, state)
       break

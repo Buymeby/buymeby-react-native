@@ -12,6 +12,9 @@ class HeaderNav extends Component {
       case 'chevron-left':
         this.props.navigateBack()
         break
+      case 'menu':
+        this.props.openDrawer()
+        break
       default:
         break
     }
@@ -48,7 +51,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   navigateBack: () => dispatch({ type: 'NavigateBack' }),
-  navigateCart: () => dispatch({ type: 'NavigateCart' })
+  navigateCart: () => dispatch({ type: 'NavigateCart' }),
+  openDrawer: () => dispatch({ type: 'DrawerToggle' })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderNav)
