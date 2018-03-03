@@ -3,14 +3,11 @@ import { ScrollView, Text, Image, View } from 'react-native'
 import { connect } from 'react-redux'
 import AuthActions from '../Redux/AuthRedux'
 import LoginForm from '../Components/LoginForm.js'
-import RegistrationForm from '../Components/RegistrationForm.js'
-
-import { Images } from '../Themes'
 
 // Styles
-import styles from './Styles/LaunchScreenStyles'
+import styles from './Styles/ScreenStyles'
 
-class LaunchScreen extends Component {
+class LoginScreen extends Component {
   handleLoginSubmit = (values) => {
     this.props.register(values)
   }
@@ -39,10 +36,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   login: (_) => {
     dispatch(AuthActions.loginRequest(_.email, _.password))
-  },
-  register: (_) => {
-    dispatch(AuthActions.registrationRequest(_.email, _.password, _.password_confirmation))
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LaunchScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

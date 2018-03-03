@@ -1,8 +1,10 @@
 import React from 'react'
 
-import { Text, Animated, Easing } from 'react-native'
+import { Text, Animated, Easing, TouchableOpacity } from 'react-native'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
-import LaunchScreen from '../Containers/LaunchScreen'
+import SplashScreen from '../Containers/SplashScreen'
+import RegistrationScreen from '../Containers/RegistrationScreen'
+import LoginScreen from '../Containers/LoginScreen'
 import DiscoveryScreen from '../Containers/DiscoveryScreen'
 import CartScreen from '../Containers/CartScreen'
 import VendorDetailsScreen from '../Containers/VendorDetailsScreen'
@@ -20,54 +22,54 @@ const noTransitionConfig = () => ({
   }
 })
 
-const DrawerNav = DrawerNavigator({
-  DiscoveryScreen: { screen: DiscoveryScreen },
-  screen2: { screen: CartScreen },
-  screen3: { screen: LaunchScreen },
-}, {
-  gesturesEnabled: false,
-  contentComponent: (props) => <DrawerContainer {...props} />
-})
-
 const PrimaryNav = StackNavigator({
-  DrawerNav: {
-    screen: DrawerNav
-  },
-  LaunchScreen: {
-    screen: LaunchScreen
-  },
   DiscoveryScreen: {
     screen: DiscoveryScreen,
-    navigationOptions: { title: 'Buymeby'}
+    navigationOptions: ({navigation}) => ({
+      headerTitle: "Buymeby",
+      headerLeft: <TouchableOpacity onPress={() => { console.tron.log(navigation); navigation.navigate('DrawerToggle') }}>
+                    <Icon name="bars" size={20} style={{paddingLeft: 10}} />
+                  </TouchableOpacity>
+    })
   },
-  CartScreen: {
-    screen: CartScreen,
-    navigationOptions: { title: 'Cart' }
+  VendorDetailsScreen: {
+    screen: VendorDetailsScreen,
+    navigationOptions: ({navigation}) => ({
+    })
   },
-  VendorDetailsScreen: { screen: VendorDetailsScreen },
-  ItemDetailsScreen: { screen: ItemDetailsScreen }
+  ItemDetailsScreen: {
+    screen: ItemDetailsScreen
+  },
+  CartScreen: { screen: CartScreen }
 }, {
   headerMode: 'float',
-  title: 'Buymeby',
-  initialRouteName: 'LaunchScreen',
+  initialRouteName: 'DiscoveryScreen',
   navigationOptions: ({navigation}) => ({
     gesturesEnabled: false,
-    headerLeft: <Icon onPress={() => {
-      if (navigation.state.index === 0) {
-        navigation.navigate('DrawerOpen')
-      } else {
-        navigation.navigate('DrawerClose')
-      }
-    }} name="bars" size={20} style={{paddingLeft: 5}}></Icon>
+    headerTitle: 'Buymeby',
+    headerRight: <TouchableOpacity onPress={() => { console.tron.log(navigation); navigation.navigate('CartScreen') }}>
+                   <Icon name="shopping-cart" size={20} style={{paddingRight: 10}} />
+                 </TouchableOpacity>
   })
 })
 
+const DrawerNav = DrawerNavigator({
+  PrimaryNav: { screen: PrimaryNav },
+  screen2: { screen: CartScreen },
+  screen3: { screen: RegistrationScreen },
+}, {
+  gesturesEnabled: false
+})
+
 const RootNav = StackNavigator({
-  primaryNav: { screen: PrimaryNav}
+  SplashScreen: { screen: SplashScreen },
+  RegistrationScreen: { screen: RegistrationScreen },
+  LoginScreen: { screen: LoginScreen },
+  DrawerNav: { screen: DrawerNav }
 }, {
   // Default config for all screens
   headerMode: 'none',
   transitionConfig: noTransitionConfig
 })
 
-export default PrimaryNav
+export default RootNav

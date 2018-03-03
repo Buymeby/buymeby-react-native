@@ -25,12 +25,14 @@ export function * verifyToken (api, action) {
       persistAuthHeadersInDeviceStorage(response.headers)
       yield put(StartupActions.startupSuccess(response.data))
       yield put(AuthActions.tokenSuccess(response.data))
-      yield put({ type: 'NavigateDiscovery' })
+      yield put({ type: 'NavigateDrawer' })
     } else {
       yield put(AuthActions.tokenFailure())
+      yield put({ type: 'NavigateRegistration' })
     }
   } else {
     yield put(AuthActions.tokenFailure())
+    yield put({ type: 'NavigateRegistration' })
   }
 }
 

@@ -5,10 +5,8 @@ import VendorLocator from '../Components/VendorLocator'
 import VendorList from '../Components/VendorList'
 import { connect } from 'react-redux'
 
-import { Images } from '../Themes'
-
 // Styles
-import styles from './Styles/LaunchScreenStyles'
+import styles from './Styles/ScreenStyles'
 
 class DiscoveryScreen extends Component {
   componentWillMount() {

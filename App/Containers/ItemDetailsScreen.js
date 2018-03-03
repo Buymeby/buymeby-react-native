@@ -21,7 +21,7 @@ import {
 } from '@shoutem/ui';
 
 // Styles
-import styles from './Styles/LaunchScreenStyles'
+import styles from './Styles/ScreenStyles'
 
 class ItemDetailsScreen extends Component {
   constructor(props) {

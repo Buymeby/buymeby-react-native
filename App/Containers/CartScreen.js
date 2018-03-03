@@ -5,10 +5,8 @@ import CartItemList from '../Components/CartItemList'
 import { connect } from 'react-redux'
 import { Button } from '@shoutem/ui'
 
-import { Images } from '../Themes'
-
 // Styles
-import styles from './Styles/LaunchScreenStyles'
+import styles from './Styles/ScreenStyles'
 
 class CartScreen extends Component {
   componentWillMount () {

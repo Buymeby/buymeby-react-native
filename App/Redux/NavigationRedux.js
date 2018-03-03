@@ -6,7 +6,7 @@ const assignHeaderState = (state) => {
   let vendor = state.vendor
   let item = state.item
   switch(newScreen) {
-    case 'LaunchScreen':
+    case 'RegistrationScreen':
       return Object.assign(state, { headerText: 'Buymeby', icon: 'menu' })
     case 'VendorDetailsScreen':
       return Object.assign(state, { headerText: vendor.name, icon: 'chevron-left' })
@@ -22,7 +22,25 @@ const assignHeaderState = (state) => {
 export const reducer = (state, action) => {
   let newState
   switch (action.type) {
-    case 'NavigateDiscovery':
+    case 'NavigateRegistration':
+      newState = AppNavigation.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'RegistrationScreen'}),
+        state
+      )
+      break
+    case 'NavigateLogin':
+      newState = AppNavigation.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'LoginScreen'}),
+        state
+      )
+      break
+    case 'NavigateDrawer':
+      newState = AppNavigation.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'DrawerNav'}),
+        state
+      )
+      break
+  case 'NavigateDiscovery':
       newState = AppNavigation.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'DiscoveryScreen'}),
         Object.assign(state, { vendor: action.vendor })
@@ -52,20 +70,17 @@ export const reducer = (state, action) => {
         state
       )
       break
-    case 'OpenDrawer':
+    case 'Navigation/NAVIGATE':
       newState = AppNavigation.router.getStateForAction(
-        NavigationActions.navigate({ routeName: 'DrawerOpen' }),
+        NavigationActions.navigate({ routeName: action.routeName }),
         state
       )
-      console.tron.log({
-        state: state,
-        newState: newState
-      })
       break
     default:
       newState = AppNavigation.router.getStateForAction(action, state)
       break
   }
+
   if (newState) {
     return assignHeaderState(newState)
   }
