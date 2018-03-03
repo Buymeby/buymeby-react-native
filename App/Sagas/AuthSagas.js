@@ -18,6 +18,7 @@ export function * verifyToken (api, action) {
       'client': yield call([AsyncStorage, 'getItem'], 'client'),
       'uid': yield call([AsyncStorage, 'getItem'], 'uid')
     }
+    console.tron.log(tokenParams)
     const response = yield call(api.verifyToken, tokenParams)
 
     if (response.ok) {

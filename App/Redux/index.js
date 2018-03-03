@@ -11,7 +11,7 @@ export const reducers = combineReducers({
   github: require('./GithubRedux').reducer,
   startup: require('./StartupRedux').reducer,
   vendor: require('./VendorRedux').reducer,
-  search: require('./SearchRedux').reducer,
+  order: require('./OrderRedux').reducer,
   form: formReducer,
   reduxTokenAuth: reduxTokenAuthReducer
 })

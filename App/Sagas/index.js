@@ -8,6 +8,7 @@ import DebugConfig from '../Config/DebugConfig'
 import { StartupTypes } from '../Redux/StartupRedux'
 import { GithubTypes } from '../Redux/GithubRedux'
 import { VendorTypes } from '../Redux/VendorRedux'
+import { OrderTypes } from '../Redux/OrderRedux'
 import { AuthTypes } from '../Redux/AuthRedux'
 import { CartTypes } from '../Redux/CartRedux'
 
@@ -16,6 +17,7 @@ import { CartTypes } from '../Redux/CartRedux'
 import { startup } from './StartupSagas'
 import { getUserAvatar } from './GithubSagas'
 import { getVendor, getVendorList } from './VendorSagas'
+import { getOrder, getOrderList } from './OrderSagas'
 import { register, login, verifyToken } from './AuthSagas'
 import { initializeCart, addToCart, removeFromCart, clearCart, populateCart, placeOrder } from './CartSagas'
 
@@ -41,6 +43,7 @@ export default function * root () {
     takeLatest(CartTypes.CLEAR, clearCart),
 
     takeLatest(VendorTypes.VENDOR_LIST_REQUEST, getVendorList, api),
+    takeLatest(OrderTypes.ORDER_LIST_REQUEST, getOrderList, api),
 
     takeLatest('NavigateVendor', getVendor, api)
   ])

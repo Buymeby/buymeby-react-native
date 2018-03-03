@@ -18,6 +18,9 @@ const create = (baseURL = 'http://localhost:3000/api/') => {
   const getVendors = () => api.get('vendors')
   const getVendor = (vendor) => api.get('vendors/' + vendor.id)
 
+  const getOrders = () => api.get('user_orders')
+  const getOrder = (order) => api.get('user_orders/' + order.id)
+
   const populateCart = (cart) => api.post('populate_cart', cart)
   const placeOrder = (cart) => api.post('place_order', cart)
 
@@ -32,6 +35,8 @@ const create = (baseURL = 'http://localhost:3000/api/') => {
     getUser,
     getVendors,
     getVendor,
+    getOrders,
+    getOrder,
     registerUser,
     loginUser,
     verifyToken,
