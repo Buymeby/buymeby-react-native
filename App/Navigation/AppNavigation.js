@@ -9,6 +9,8 @@ import DiscoveryScreen from '../Containers/DiscoveryScreen'
 import CartScreen from '../Containers/CartScreen'
 import VendorDetailsScreen from '../Containers/VendorDetailsScreen'
 import ItemDetailsScreen from '../Containers/ItemDetailsScreen'
+import ProfileScreen from '../Containers/ProfileScreen'
+import OrdersScreen from '../Containers/OrdersScreen'
 import DrawerContainer from '../Containers/DrawerContainer'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -27,20 +29,26 @@ const PrimaryNav = StackNavigator({
     screen: DiscoveryScreen,
     navigationOptions: ({navigation}) => ({
       headerTitle: "Buymeby",
-      headerLeft: <TouchableOpacity onPress={() => { console.tron.log(navigation); navigation.navigate('DrawerToggle') }}>
+      headerLeft: <TouchableOpacity onPress={() => { navigation.navigate('DrawerToggle') }}>
                     <Icon name="bars" size={20} style={{paddingLeft: 10}} />
                   </TouchableOpacity>
     })
   },
   VendorDetailsScreen: {
-    screen: VendorDetailsScreen,
-    navigationOptions: ({navigation}) => ({
-    })
+    screen: VendorDetailsScreen
   },
   ItemDetailsScreen: {
     screen: ItemDetailsScreen
   },
-  CartScreen: { screen: CartScreen }
+  CartScreen: {
+    screen: CartScreen,
+    navigationOptions: ({navigation}) => ({
+      headerTitle: "Cart",
+      headerRight: <TouchableOpacity onPress={() => { navigation.navigate('DiscoveryScreen') }}>
+                     <Icon name="home" size={20} style={{paddingRight: 10}} />
+                   </TouchableOpacity>
+    })
+  }
 }, {
   headerMode: 'float',
   initialRouteName: 'DiscoveryScreen',
@@ -53,10 +61,34 @@ const PrimaryNav = StackNavigator({
   })
 })
 
+const OrdersStack = StackNavigator({
+  OrdersScreen: { screen: OrdersScreen }
+}, {
+  headerMode: 'float',
+  navigationOptions: ({navigation}) => ({
+    headerTitle: "Orders",
+    headerLeft: <TouchableOpacity onPress={() => { navigation.navigate('DrawerToggle') }}>
+                  <Icon name="bars" size={20} style={{paddingLeft: 10}} />
+                </TouchableOpacity>
+  })
+})
+
+const ProfileStack = StackNavigator({
+  ProfileScreen: { screen: ProfileScreen }
+}, {
+  headerMode: 'float',
+  navigationOptions: ({navigation}) => ({
+    headerTitle: "Profile",
+    headerLeft: <TouchableOpacity onPress={() => { console.tron.log(navigation); navigation.navigate('DrawerToggle') }}>
+                  <Icon name="bars" size={20} style={{paddingLeft: 10}} />
+                </TouchableOpacity>
+  })
+})
+
 const DrawerNav = DrawerNavigator({
-  PrimaryNav: { screen: PrimaryNav },
-  screen2: { screen: CartScreen },
-  screen3: { screen: RegistrationScreen },
+  PrimaryNav: { screen: PrimaryNav, navigationOptions: {title: 'Discover'}},
+  Profile: { screen: ProfileStack, navigationOptions: {title: 'Profile'} },
+  Orders: { screen: OrdersStack, navigationOptions: {title: 'Orders'} }
 }, {
   gesturesEnabled: false
 })
