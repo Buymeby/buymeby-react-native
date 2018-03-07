@@ -55,7 +55,7 @@ const PrimaryNav = StackNavigator({
   navigationOptions: ({navigation}) => ({
     gesturesEnabled: false,
     headerTitle: 'Buymeby',
-    headerRight: <TouchableOpacity onPress={() => { console.tron.log(navigation); navigation.navigate('CartScreen') }}>
+    headerRight: <TouchableOpacity onPress={() => { navigation.navigate('CartScreen') }}>
                    <Icon name="shopping-cart" size={20} style={{paddingRight: 10}} />
                  </TouchableOpacity>
   })
@@ -79,7 +79,7 @@ const ProfileStack = StackNavigator({
   headerMode: 'float',
   navigationOptions: ({navigation}) => ({
     headerTitle: "Profile",
-    headerLeft: <TouchableOpacity onPress={() => { console.tron.log(navigation); navigation.navigate('DrawerToggle') }}>
+    headerLeft: <TouchableOpacity onPress={() => { navigation.navigate('DrawerToggle') }}>
                   <Icon name="bars" size={20} style={{paddingLeft: 10}} />
                 </TouchableOpacity>
   })
