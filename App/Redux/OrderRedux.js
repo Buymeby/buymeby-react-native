@@ -21,9 +21,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   data: null,
   fetching: null,
-  selected_order: {
-    items: []
-  },
+  selected_order: null,
   orders: [],
   error: null
 })
@@ -34,6 +32,7 @@ export const request = (state, { data }) =>
   state.merge({ fetching: true, data, payload: null })
 
 export const success = (state, action) => {
+  console.tron.log(action)
   const { order } = action
   return state.merge({ fetching: false, error: null, selected_order: order })
 }

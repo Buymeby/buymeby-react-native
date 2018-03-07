@@ -34,7 +34,7 @@ class OrdersScreen extends Component {
         <ScrollView>
         {
           orders.map((order) => (
-            <TouchableOpacity key={order.id}>
+            <TouchableOpacity key={order.id} onPress={this.props.openOrderDetails.bind(this, order)}>
               <Row>
                 <Image
                   styleName="small rounded-corners"
@@ -70,7 +70,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getOrderList: () => dispatch(OrderActions.orderListRequest())
+  getOrderList: () => dispatch(OrderActions.orderListRequest()),
+  openOrderDetails: (order) => dispatch({ type: 'NavigateOrder', order: order })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrdersScreen)

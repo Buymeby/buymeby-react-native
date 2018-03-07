@@ -11,6 +11,7 @@ import VendorDetailsScreen from '../Containers/VendorDetailsScreen'
 import ItemDetailsScreen from '../Containers/ItemDetailsScreen'
 import ProfileScreen from '../Containers/ProfileScreen'
 import OrdersScreen from '../Containers/OrdersScreen'
+import OrderDetailsScreen from '../Containers/OrderDetailsScreen'
 import DrawerContainer from '../Containers/DrawerContainer'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -62,14 +63,24 @@ const PrimaryNav = StackNavigator({
 })
 
 const OrdersStack = StackNavigator({
-  OrdersScreen: { screen: OrdersScreen }
-}, {
-  headerMode: 'float',
-  navigationOptions: ({navigation}) => ({
+  OrdersScreen: {
+    screen: OrdersScreen,
+    navigationOptions: ({navigation}) => ({
     headerTitle: "Orders",
     headerLeft: <TouchableOpacity onPress={() => { navigation.navigate('DrawerToggle') }}>
                   <Icon name="bars" size={20} style={{paddingLeft: 10}} />
                 </TouchableOpacity>
+    })
+  },
+  OrderDetailsScreen: { screen: OrderDetailsScreen }
+}, {
+  headerMode: 'float',
+  navigationOptions: ({navigation}) => ({
+    gesturesEnabled: false,
+    headerTitle: 'Buymeby',
+    headerRight: <TouchableOpacity onPress={() => { navigation.navigate('DrawerNav') }}>
+                   <Icon name="home" size={20} style={{paddingRight: 10}} />
+                 </TouchableOpacity>
   })
 })
 

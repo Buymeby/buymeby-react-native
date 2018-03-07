@@ -5,6 +5,8 @@ const assignHeaderState = (state) => {
   let newScreen = state.routes[state.index].routeName
   let vendor = state.vendor
   let item = state.item
+  let order = state.order
+  
   switch(newScreen) {
     case 'RegistrationScreen':
       return Object.assign(state, { headerText: 'Buymeby', icon: 'menu' })
@@ -43,7 +45,7 @@ export const reducer = (state, action) => {
   case 'NavigateDiscovery':
       newState = AppNavigation.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'DiscoveryScreen'}),
-        Object.assign(state, { vendor: action.vendor })
+        state
       )
       break
     case 'NavigateCart':
@@ -62,6 +64,12 @@ export const reducer = (state, action) => {
       newState = AppNavigation.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'ItemDetailsScreen'}),
         Object.assign(state, { item: action.item })
+      )
+      break
+    case 'NavigateOrder':
+      newState = AppNavigation.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'OrderDetailsScreen'}),
+        Object.assign(state, { order: action.order })
       )
       break
     case 'NavigateBack':

@@ -32,9 +32,11 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 export default function * root () {
   yield all([
     takeLatest(StartupTypes.STARTUP, startup, api),
+
     takeLatest(AuthTypes.LOGIN_REQUEST, login, api),
     takeLatest(AuthTypes.TOKEN_REQUEST, verifyToken, api),
     takeLatest(AuthTypes.REGISTRATION_REQUEST, register, api),
+
     takeLatest(CartTypes.INITIALIZE, initializeCart),
     takeLatest(CartTypes.POPULATE, populateCart, api),
     takeLatest(CartTypes.ORDER, placeOrder, api),
@@ -45,6 +47,7 @@ export default function * root () {
     takeLatest(VendorTypes.VENDOR_LIST_REQUEST, getVendorList, api),
     takeLatest(OrderTypes.ORDER_LIST_REQUEST, getOrderList, api),
 
-    takeLatest('NavigateVendor', getVendor, api)
+    takeLatest('NavigateVendor', getVendor, api),
+    takeLatest('NavigateOrder', getOrder, api)
   ])
 }
