@@ -59,7 +59,6 @@ class OrderDetailsScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.tron.log(state)
   return {
     order_details: state.order.selected_order
   }

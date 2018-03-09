@@ -32,7 +32,6 @@ export const request = (state, { data }) =>
   state.merge({ fetching: true, data, payload: null })
 
 export const success = (state, action) => {
-  console.tron.log(action)
   const { order } = action
   return state.merge({ fetching: false, error: null, selected_order: order })
 }
