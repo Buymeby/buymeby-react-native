@@ -31,7 +31,7 @@ class RegistrationForm extends React.Component {
 }
 
 RegistrationForm = reduxForm({
-  form: 'login'
+  form: 'register'
 })(RegistrationForm);
 
 export default RegistrationForm;

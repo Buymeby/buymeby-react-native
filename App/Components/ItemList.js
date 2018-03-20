@@ -30,7 +30,7 @@ class ItemList extends Component {
           <Card styleName="flexible">
             <Image
               styleName="medium-wide"
-              source={{ uri: item.image_src  }}
+              source={{ uri: item.image_file_src  }}
             />
             <View styleName="content">
               <Subtitle numberOfLines={2}>{item.name}</Subtitle>

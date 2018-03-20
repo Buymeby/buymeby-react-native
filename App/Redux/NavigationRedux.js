@@ -1,26 +1,6 @@
 import AppNavigation from '../Navigation/AppNavigation'
 import { NavigationActions } from 'react-navigation'
 
-const assignHeaderState = (state) => {
-  let newScreen = state.routes[state.index].routeName
-  let vendor = state.vendor
-  let item = state.item
-  let order = state.order
-  
-  switch(newScreen) {
-    case 'RegistrationScreen':
-      return Object.assign(state, { headerText: 'Buymeby', icon: 'menu' })
-    case 'VendorDetailsScreen':
-      return Object.assign(state, { headerText: vendor.name, icon: 'chevron-left' })
-    case 'ItemDetailsScreen':
-      return Object.assign(state, { headerText: vendor.name, icon: 'chevron-left' })
-    case 'CartScreen':
-      return Object.assign(state, { headerText: 'Cart', icon: 'chevron-left' })
-    default:
-      return Object.assign(state, { headerText: 'Buymeby', icon: 'menu' })
-  }
-}
-
 export const reducer = (state, action) => {
   let newState
   switch (action.type) {
@@ -90,7 +70,7 @@ export const reducer = (state, action) => {
   }
 
   if (newState) {
-    return assignHeaderState(newState)
+    return newState
   }
   return state
 }

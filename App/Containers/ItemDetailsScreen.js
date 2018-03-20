@@ -55,7 +55,7 @@ class ItemDetailsScreen extends Component {
           <Tile>
             <Image
               styleName="featured"
-              source={{ uri: item.image_src }}
+              source={{ uri: item.image_file_src }}
               >
             </Image>
           </Tile>

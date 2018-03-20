@@ -46,7 +46,7 @@ class CartItemList extends React.Component {
                 <Row key={vendor.id + '-' + item.id}>
                   <Image
                     styleName="small rounded-corners"
-                    source={{ uri: item.image_src }}
+                    source={{ uri: item.image_file_src }}
                   />
                   <View styleName="vertical stretch space-between">
                     <Subtitle>{item.name}</Subtitle>

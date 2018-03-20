@@ -28,7 +28,7 @@ class OrderDetailsScreen extends Component {
                         <Row key={vendor_order.id + '-' + item.id}>
                           <Image
                             styleName="small rounded-corners"
-                            source={{ uri: item.image_src }}
+                            source={{ uri: item.image_file_src }}
                           />
                           <View styleName="vertical stretch space-between">
                             <Subtitle>{item.name}</Subtitle>

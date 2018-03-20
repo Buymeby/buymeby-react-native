@@ -52,7 +52,7 @@ export function * login (api, action) {
     setAuthHeaders(response.headers, api)
     persistAuthHeadersInDeviceStorage(response.headers)
     yield put(AuthActions.loginSuccess(response.data))
-    yield put({ type: 'NavigateDiscovery' })
+    yield put({ type: 'NavigateDrawer' })
   } else {
     yield put(AuthActions.loginFailure())
   }
@@ -78,7 +78,7 @@ export function * register (api, action) {
     setAuthHeaders(response.headers, api)
     persistAuthHeadersInDeviceStorage(response.headers)
     yield put(AuthActions.registrationSuccess(response.data))
-    yield put({ type: 'NavigateDiscovery' })
+    yield put({ type: 'NavigateDrawer' })
   } else {
     yield put(AuthActions.registrationFailure())
   }
