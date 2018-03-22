@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import styles from './Styles/ItemListStyle'
 import { connect } from 'react-redux'
 import {
   Screen,

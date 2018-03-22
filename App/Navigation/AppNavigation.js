@@ -99,7 +99,8 @@ const ProfileStack = StackNavigator({
 const DrawerNav = DrawerNavigator({
   PrimaryNav: { screen: PrimaryNav, navigationOptions: {title: 'Discover'}},
   Profile: { screen: ProfileStack, navigationOptions: {title: 'Profile'} },
-  Orders: { screen: OrdersStack, navigationOptions: {title: 'Orders'} }
+  Orders: { screen: OrdersStack, navigationOptions: {title: 'Orders'} },
+  Register: { screen: RegistrationScreen, navigationOptions: {title: 'Register'} },
 }, {
   gesturesEnabled: false
 })
