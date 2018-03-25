@@ -45,6 +45,7 @@ const VendorTab = TabNavigator({
   tabBarPosition: 'top',
   swipeEnabled: true,
   lazy: false,
+  animationEnabled:false,
   tabBarOptions: {
     style:{
       backgroundColor: '#d3d3d3',
@@ -81,6 +82,8 @@ const PrimaryNav = StackNavigator({
   headerMode: 'float',
   initialRouteName: 'DiscoveryScreen',
   lazy: true,
+  swipeEnabled:false,
+  animationEnabled:false,
   navigationOptions: ({navigation}) => ({
     gesturesEnabled: false,
     headerRight: <TouchableOpacity onPress={() => { navigation.navigate('CartScreen') }}>
