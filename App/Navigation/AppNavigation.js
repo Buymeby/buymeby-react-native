@@ -130,7 +130,7 @@ const DrawerNav = DrawerNavigator({
   PrimaryNav: { screen: PrimaryNav, navigationOptions: {title: 'Discover'}},
   Profile: { screen: ProfileStack, navigationOptions: {title: 'Profile'} },
   Orders: { screen: OrdersStack, navigationOptions: {title: 'Orders'} },
-  // Register: { screen: RegistrationScreen, navigationOptions: {title: 'Register'} },
+  Register: { screen: RegistrationScreen, navigationOptions: {title: 'Logout'} },
 }, {
   gesturesEnabled: false
 })
