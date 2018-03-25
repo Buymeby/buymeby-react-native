@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 import CartActions from '../Redux/CartRedux'
+import { NavigationActions } from 'react-navigation'
 import { AsyncStorage } from 'react-native'
 import _ from 'lodash'
 
@@ -81,6 +82,7 @@ export function * addToCart (action) {
 
   if (initial_cart_count + quantity == updated_cart_count) {
     yield put(CartActions.addSuccess(updated_cart, updated_cart_count))
+    yield put({ type: 'NavigateBack' })
   } else {
     yield put(CartActions.addFailure())
   }
@@ -145,6 +147,7 @@ export function * placeOrder (api, action) {
   if (response.ok) {
     yield put(CartActions.orderSuccess())
     yield put(CartActions.clear())
+    yield put(NavigationActions.navigate({ routeName: 'OrdersScreen' }))
   } else {
     yield put(CartActions.orderFailure())
   }

@@ -67,6 +67,7 @@ class ItemList extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.tron.log(state)
   return {
     items: state.vendor.selected_vendor.items
   }

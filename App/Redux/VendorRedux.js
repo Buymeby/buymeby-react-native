@@ -22,6 +22,7 @@ export const INITIAL_STATE = Immutable({
   data: null,
   fetching: null,
   selected_vendor: {
+    hours: [],
     items: []
   },
   vendors: [],

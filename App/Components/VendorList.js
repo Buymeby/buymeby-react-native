@@ -35,7 +35,7 @@ class VendorList extends React.Component {
           <Row>
             <Image
               styleName="small rounded-corners"
-              source={{ uri: vendor.image_src || " " }}
+              source={{ uri: vendor.image_src || vendor.logo_url }}
             />
             <View styleName="vertical stretch space-between">
               <Subtitle>{vendor.name}</Subtitle>

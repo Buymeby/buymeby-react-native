@@ -36,7 +36,7 @@ export const reducer = (state, action) => {
       break
     case 'NavigateVendor':
       newState = AppNavigation.router.getStateForAction(
-        NavigationActions.navigate({ routeName: 'VendorDetailsScreen'}),
+        NavigationActions.navigate({ routeName: 'VendorTab'}),
         Object.assign(state, { vendor: action.vendor })
       )
       break

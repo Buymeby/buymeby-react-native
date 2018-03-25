@@ -1,13 +1,14 @@
 import React from 'react'
 
 import { Text, Animated, Easing, TouchableOpacity } from 'react-native'
-import { StackNavigator, DrawerNavigator } from 'react-navigation'
+import { StackNavigator, DrawerNavigator, TabNavigator, TabBarTop } from 'react-navigation'
 import SplashScreen from '../Containers/SplashScreen'
 import RegistrationScreen from '../Containers/RegistrationScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import DiscoveryScreen from '../Containers/DiscoveryScreen'
 import CartScreen from '../Containers/CartScreen'
 import VendorDetailsScreen from '../Containers/VendorDetailsScreen'
+import VendorStoreScreen from '../Containers/VendorStoreScreen'
 import ItemDetailsScreen from '../Containers/ItemDetailsScreen'
 import ProfileScreen from '../Containers/ProfileScreen'
 import OrdersScreen from '../Containers/OrdersScreen'
@@ -25,6 +26,32 @@ const noTransitionConfig = () => ({
   }
 })
 
+const VendorTab = TabNavigator({
+  VendorDetailsScreen: {
+    screen: VendorDetailsScreen,
+    navigationOptions: {
+      title: 'Profile'
+    }
+  },
+  VendorStoreScreen: {
+    screen: VendorStoreScreen,
+    navigationOptions: {
+      title: 'Shop'
+    }
+  }
+}, {
+  initialRouteName: 'VendorDetailsScreen',
+  tabBarComponent: TabBarTop,
+  tabBarPosition: 'top',
+  swipeEnabled: true,
+  lazy: false,
+  tabBarOptions: {
+    style:{
+      backgroundColor: '#d3d3d3',
+    }
+  }
+})
+
 const PrimaryNav = StackNavigator({
   DiscoveryScreen: {
     screen: DiscoveryScreen,
@@ -35,8 +62,8 @@ const PrimaryNav = StackNavigator({
                   </TouchableOpacity>
     })
   },
-  VendorDetailsScreen: {
-    screen: VendorDetailsScreen
+  VendorTab: {
+    screen: VendorTab
   },
   ItemDetailsScreen: {
     screen: ItemDetailsScreen
@@ -53,9 +80,9 @@ const PrimaryNav = StackNavigator({
 }, {
   headerMode: 'float',
   initialRouteName: 'DiscoveryScreen',
+  lazy: true,
   navigationOptions: ({navigation}) => ({
     gesturesEnabled: false,
-    headerTitle: 'Buymeby',
     headerRight: <TouchableOpacity onPress={() => { navigation.navigate('CartScreen') }}>
                    <Icon name="shopping-cart" size={20} style={{paddingRight: 10}} />
                  </TouchableOpacity>
@@ -100,7 +127,7 @@ const DrawerNav = DrawerNavigator({
   PrimaryNav: { screen: PrimaryNav, navigationOptions: {title: 'Discover'}},
   Profile: { screen: ProfileStack, navigationOptions: {title: 'Profile'} },
   Orders: { screen: OrdersStack, navigationOptions: {title: 'Orders'} },
-  Register: { screen: RegistrationScreen, navigationOptions: {title: 'Register'} },
+  // Register: { screen: RegistrationScreen, navigationOptions: {title: 'Register'} },
 }, {
   gesturesEnabled: false
 })

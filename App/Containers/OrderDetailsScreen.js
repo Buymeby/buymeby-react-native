@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import CartActions from '../Redux/CartRedux'
 import { Title, View, Button, Divider, ScrollView, Text, Row, Image, Subtitle, Caption } from '@shoutem/ui'
 
 class OrderDetailsScreen extends Component {
@@ -65,7 +66,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  completeOrder: () => dispatch(CartActions.clear())
+  completeOrder: () => dispatch({ type: 'NavigateBack' })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderDetailsScreen)

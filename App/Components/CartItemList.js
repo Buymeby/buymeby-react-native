@@ -37,10 +37,12 @@ class CartItemList extends React.Component {
     return (
       populated_cart.map((vendor, i) => (
         <View key={vendor.id}>
-          <Row styleName="small">
-            <Title>{vendor.name}</Title>
-            <Icon styleName="disclosure" name="right-arrow" />
-          </Row>
+          <TouchableOpacity onPress={this.props.navigateVendor.bind(this, vendor)}>
+            <Row styleName="small">
+              <Title>{vendor.name}</Title>
+              <Icon styleName="disclosure" name="right-arrow" />
+            </Row>
+          </TouchableOpacity>
             {
               vendor.items.map((item, j) => (
                 <Row key={vendor.id + '-' + item.id}>
@@ -75,7 +77,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  removeFromCart: (vendor_id, item_id) => dispatch(CartActions.remove(vendor_id, item_id))
+  removeFromCart: (vendor_id, item_id) => dispatch(CartActions.remove(vendor_id, item_id)),
+  navigateVendor: (vendor) => dispatch({ type: 'NavigateVendor', vendor: vendor })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartItemList)
