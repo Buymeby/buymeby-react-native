@@ -110,8 +110,8 @@ android {
         applicationId "com.buymeby"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 3
-        versionName "v0.3"
+        versionCode 4
+        versionName "v0.4"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

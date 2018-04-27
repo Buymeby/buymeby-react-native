@@ -19,9 +19,9 @@ class DiscoveryScreen extends Component {
     // </View>
     return (
       <View style={styles.mainContainer}>
-          <ScrollView>
-            <VendorList />
-          </ScrollView>
+        <ScrollView>
+          <VendorList />
+        </ScrollView>
       </View>
     )
   }
