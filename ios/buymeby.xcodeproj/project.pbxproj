@@ -67,7 +67,6 @@
 		BD0EDED5932A4E838DD8C0FB /* Rubik-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7A7CDFBC66641CE8B50CA22 /* Rubik-LightItalic.ttf */; };
 		C1C6B6F183A74FA3920E2E0B /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB5FFBC9AB1E4508A0F249F7 /* Entypo.ttf */; };
 		CE3272581AC44DCA92E4207C /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D157FF19A0848AA9B42C005 /* libBVLinearGradient.a */; };
-		D3DFFA98D0A5431E92B3A6F5 /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 365079CCA7BC4FF6AACEB67D /* libRNShare.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E4E87E71758C4A5AB96FE191 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C414A0D4D714A5DB00A404D /* libRNDeviceInfo.a */; };
 		E7B833A38F79458693D1A0BB /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27498704CC2345758C30E0D3 /* Rubik-BlackItalic.ttf */; };
 /* End PBXBuildFile section */
@@ -479,7 +478,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				330827FE25DD4294BF379C1B /* libRNVectorIcons.a in Frameworks */,
 				CE3272581AC44DCA92E4207C /* libBVLinearGradient.a in Frameworks */,
-				D3DFFA98D0A5431E92B3A6F5 /* libRNShare.a in Frameworks */,
 				609AAA7552784D5E8395D1DC /* libReactNativeConfig.a in Frameworks */,
 				E4E87E71758C4A5AB96FE191 /* libRNDeviceInfo.a in Frameworks */,
 				8FEDC98C71974488A69F3510 /* libReact.a in Frameworks */,

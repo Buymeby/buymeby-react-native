@@ -5,7 +5,8 @@ import { StackNavigator, DrawerNavigator, TabNavigator, TabBarTop } from 'react-
 import SplashScreen from '../Containers/SplashScreen'
 import RegistrationScreen from '../Containers/RegistrationScreen'
 import LoginScreen from '../Containers/LoginScreen'
-import DiscoveryScreen from '../Containers/DiscoveryScreen'
+import DiscoveryMapScreen from '../Containers/DiscoveryMapScreen'
+import DiscoveryListScreen from '../Containers/DiscoveryListScreen'
 import CartScreen from '../Containers/CartScreen'
 import VendorDetailsScreen from '../Containers/VendorDetailsScreen'
 import VendorStoreScreen from '../Containers/VendorStoreScreen'
@@ -23,6 +24,33 @@ const noTransitionConfig = () => ({
     duration: 0,
     timing: Animated.timing,
     easing: Easing.step0
+  }
+})
+
+const DiscoveryTab = TabNavigator({
+  DiscoveryMapScreen: {
+    screen: DiscoveryMapScreen,
+    navigationOptions: {
+      title: 'Map'
+    }
+  },
+  DiscoveryListScreen: {
+    screen: DiscoveryListScreen,
+    navigationOptions: {
+      title: 'List'
+    }
+  }
+}, {
+  initialRouteName: 'DiscoveryMapScreen',
+  tabBarComponent: TabBarTop,
+  tabBarPosition: 'top',
+  swipeEnabled: true,
+  lazy: false,
+  animationEnabled:false,
+  tabBarOptions: {
+    style:{
+      backgroundColor: '#d3d3d3',
+    }
   }
 })
 
@@ -54,8 +82,8 @@ const VendorTab = TabNavigator({
 })
 
 const PrimaryNav = StackNavigator({
-  DiscoveryScreen: {
-    screen: DiscoveryScreen,
+  DiscoveryTab: {
+    screen: DiscoveryTab,
     navigationOptions: ({navigation}) => ({
       headerTitle: "Buymeby",
       headerLeft: <TouchableOpacity onPress={() => { navigation.navigate('DrawerToggle') }}>
@@ -73,14 +101,14 @@ const PrimaryNav = StackNavigator({
     screen: CartScreen,
     navigationOptions: ({navigation}) => ({
       headerTitle: "Cart",
-      headerRight: <TouchableOpacity onPress={() => { navigation.navigate('DiscoveryScreen') }}>
+      headerRight: <TouchableOpacity onPress={() => { navigation.navigate('DiscoveryTab') }}>
                      <Icon name="home" size={20} style={{paddingRight: 10}} />
                    </TouchableOpacity>
     })
   }
 }, {
   headerMode: 'float',
-  initialRouteName: 'DiscoveryScreen',
+  initialRouteName: 'DiscoveryTab',
   lazy: true,
   swipeEnabled:false,
   animationEnabled:false,
