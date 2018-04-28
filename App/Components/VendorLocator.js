@@ -77,6 +77,7 @@ class VendorLocator extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.tron.log(state)
   return {
     vendors: state.vendor.vendors,
     locations: state.vendor.locations,
